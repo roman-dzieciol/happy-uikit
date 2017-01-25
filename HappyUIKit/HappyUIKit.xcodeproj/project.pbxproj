@@ -31,7 +31,7 @@
 		E3ACDDD01E389B2600497F78 /* _RDFlowLayoutItem.m in Sources */ = {isa = PBXBuildFile; fileRef = E3ACDDBB1E389B2600497F78 /* _RDFlowLayoutItem.m */; };
 		E3ACDDD11E389B2600497F78 /* _RDFlowLayoutItem.h in Headers */ = {isa = PBXBuildFile; fileRef = E3ACDDBC1E389B2600497F78 /* _RDFlowLayoutItem.h */; };
 		E3ACDDD21E389B2600497F78 /* RDCollectionViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = E3ACDDBD1E389B2600497F78 /* RDCollectionViewFlowLayout.m */; };
-		E3ACDDD61E389BC400497F78 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = E3ACDDD51E389BC400497F78 /* README.md */; };
+		E3ACDDEF1E389DE100497F78 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = E3ACDDEE1E389DE100497F78 /* README.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,7 +72,6 @@
 		E3ACDDBB1E389B2600497F78 /* _RDFlowLayoutItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _RDFlowLayoutItem.m; sourceTree = "<group>"; };
 		E3ACDDBC1E389B2600497F78 /* _RDFlowLayoutItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _RDFlowLayoutItem.h; sourceTree = "<group>"; };
 		E3ACDDBD1E389B2600497F78 /* RDCollectionViewFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDCollectionViewFlowLayout.m; sourceTree = "<group>"; };
-		E3ACDDD51E389BC400497F78 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		E3ACDDDA1E389CAC00497F78 /* _UICollectionViewCompositionLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _UICollectionViewCompositionLayout.m; sourceTree = "<group>"; };
 		E3ACDDDB1E389CAC00497F78 /* UICollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UICollectionView.m; sourceTree = "<group>"; };
 		E3ACDDDC1E389CAC00497F78 /* UICollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UICollectionViewCell.m; sourceTree = "<group>"; };
@@ -83,6 +82,7 @@
 		E3ACDDE11E389CAC00497F78 /* UICollectionViewFlowLayoutInvalidationContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UICollectionViewFlowLayoutInvalidationContext.m; sourceTree = "<group>"; };
 		E3ACDDE21E389CAC00497F78 /* _UICollectionViewCompositionLayoutInvalidationContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _UICollectionViewCompositionLayoutInvalidationContext.m; sourceTree = "<group>"; };
 		E3ACDDE31E389CAC00497F78 /* UICollectionReusableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UICollectionReusableView.m; sourceTree = "<group>"; };
+		E3ACDDEE1E389DE100497F78 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../../README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -157,7 +157,7 @@
 		E3ACDDD41E389BB500497F78 /* Docs */ = {
 			isa = PBXGroup;
 			children = (
-				E3ACDDD51E389BC400497F78 /* README.md */,
+				E3ACDDEE1E389DE100497F78 /* README.md */,
 				E3ACDDAE1E389B2600497F78 /* Symbols.txt */,
 			);
 			name = Docs;
@@ -337,7 +337,7 @@
 			files = (
 				E3ACDDD01E389B2600497F78 /* _RDFlowLayoutItem.m in Sources */,
 				E3ACDDCC1E389B2600497F78 /* _RDFlowLayoutRow.m in Sources */,
-				E3ACDDD61E389BC400497F78 /* README.md in Sources */,
+				E3ACDDEF1E389DE100497F78 /* README.md in Sources */,
 				E3ACDDCA1E389B2600497F78 /* RDCollectionViewLayoutInvalidationContext.m in Sources */,
 				E3ACDDC91E389B2600497F78 /* RDCollectionViewFlowLayoutInvalidationContext.m in Sources */,
 				E3ACDDBE1E389B2600497F78 /* _RDFlowLayoutSection.m in Sources */,
