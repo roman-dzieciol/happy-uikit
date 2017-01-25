@@ -1,0 +1,555 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		E3ACDD991E389ABA00497F78 /* HappyUIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3ACDD8F1E389ABA00497F78 /* HappyUIKit.framework */; };
+		E3ACDD9E1E389ABA00497F78 /* HappyUIKitTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E3ACDD9D1E389ABA00497F78 /* HappyUIKitTests.m */; };
+		E3ACDDA01E389ABA00497F78 /* HappyUIKit.h in Headers */ = {isa = PBXBuildFile; fileRef = E3ACDD921E389ABA00497F78 /* HappyUIKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E3ACDDBE1E389B2600497F78 /* _RDFlowLayoutSection.m in Sources */ = {isa = PBXBuildFile; fileRef = E3ACDDA91E389B2600497F78 /* _RDFlowLayoutSection.m */; };
+		E3ACDDBF1E389B2600497F78 /* ScratchPadAsm.h in Headers */ = {isa = PBXBuildFile; fileRef = E3ACDDAA1E389B2600497F78 /* ScratchPadAsm.h */; };
+		E3ACDDC01E389B2600497F78 /* ScratchPad.h in Headers */ = {isa = PBXBuildFile; fileRef = E3ACDDAB1E389B2600497F78 /* ScratchPad.h */; };
+		E3ACDDC11E389B2600497F78 /* _RDFlowLayoutSection.h in Headers */ = {isa = PBXBuildFile; fileRef = E3ACDDAC1E389B2600497F78 /* _RDFlowLayoutSection.h */; };
+		E3ACDDC21E389B2600497F78 /* _RDFlowLayoutInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = E3ACDDAD1E389B2600497F78 /* _RDFlowLayoutInfo.h */; };
+		E3ACDDC31E389B2600497F78 /* Symbols.txt in Resources */ = {isa = PBXBuildFile; fileRef = E3ACDDAE1E389B2600497F78 /* Symbols.txt */; };
+		E3ACDDC41E389B2600497F78 /* _RDFlowLayoutInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = E3ACDDAF1E389B2600497F78 /* _RDFlowLayoutInfo.m */; };
+		E3ACDDC51E389B2600497F78 /* RDCollectionViewLayout.h in Headers */ = {isa = PBXBuildFile; fileRef = E3ACDDB01E389B2600497F78 /* RDCollectionViewLayout.h */; };
+		E3ACDDC61E389B2600497F78 /* RDCollectionViewFlowLayout.h in Headers */ = {isa = PBXBuildFile; fileRef = E3ACDDB11E389B2600497F78 /* RDCollectionViewFlowLayout.h */; };
+		E3ACDDC71E389B2600497F78 /* RDCollectionViewFlowLayoutInvalidationContext.h in Headers */ = {isa = PBXBuildFile; fileRef = E3ACDDB21E389B2600497F78 /* RDCollectionViewFlowLayoutInvalidationContext.h */; };
+		E3ACDDC81E389B2600497F78 /* RDCollectionViewLayoutInvalidationContext.h in Headers */ = {isa = PBXBuildFile; fileRef = E3ACDDB31E389B2600497F78 /* RDCollectionViewLayoutInvalidationContext.h */; };
+		E3ACDDC91E389B2600497F78 /* RDCollectionViewFlowLayoutInvalidationContext.m in Sources */ = {isa = PBXBuildFile; fileRef = E3ACDDB41E389B2600497F78 /* RDCollectionViewFlowLayoutInvalidationContext.m */; };
+		E3ACDDCA1E389B2600497F78 /* RDCollectionViewLayoutInvalidationContext.m in Sources */ = {isa = PBXBuildFile; fileRef = E3ACDDB51E389B2600497F78 /* RDCollectionViewLayoutInvalidationContext.m */; };
+		E3ACDDCB1E389B2600497F78 /* RDCollectionViewLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = E3ACDDB61E389B2600497F78 /* RDCollectionViewLayout.m */; };
+		E3ACDDCC1E389B2600497F78 /* _RDFlowLayoutRow.m in Sources */ = {isa = PBXBuildFile; fileRef = E3ACDDB71E389B2600497F78 /* _RDFlowLayoutRow.m */; };
+		E3ACDDCD1E389B2600497F78 /* HappyUIKitDefinitions.h in Headers */ = {isa = PBXBuildFile; fileRef = E3ACDDB81E389B2600497F78 /* HappyUIKitDefinitions.h */; };
+		E3ACDDCE1E389B2600497F78 /* HappyUIKitDefinitions.m in Sources */ = {isa = PBXBuildFile; fileRef = E3ACDDB91E389B2600497F78 /* HappyUIKitDefinitions.m */; };
+		E3ACDDCF1E389B2600497F78 /* _RDFlowLayoutRow.h in Headers */ = {isa = PBXBuildFile; fileRef = E3ACDDBA1E389B2600497F78 /* _RDFlowLayoutRow.h */; };
+		E3ACDDD01E389B2600497F78 /* _RDFlowLayoutItem.m in Sources */ = {isa = PBXBuildFile; fileRef = E3ACDDBB1E389B2600497F78 /* _RDFlowLayoutItem.m */; };
+		E3ACDDD11E389B2600497F78 /* _RDFlowLayoutItem.h in Headers */ = {isa = PBXBuildFile; fileRef = E3ACDDBC1E389B2600497F78 /* _RDFlowLayoutItem.h */; };
+		E3ACDDD21E389B2600497F78 /* RDCollectionViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = E3ACDDBD1E389B2600497F78 /* RDCollectionViewFlowLayout.m */; };
+		E3ACDDD61E389BC400497F78 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = E3ACDDD51E389BC400497F78 /* README.md */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		E3ACDD9A1E389ABA00497F78 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E3ACDD861E389ABA00497F78 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E3ACDD8E1E389ABA00497F78;
+			remoteInfo = HappyUIKit;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		E3ACDD8F1E389ABA00497F78 /* HappyUIKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = HappyUIKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E3ACDD921E389ABA00497F78 /* HappyUIKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HappyUIKit.h; sourceTree = "<group>"; };
+		E3ACDD931E389ABA00497F78 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E3ACDD981E389ABA00497F78 /* HappyUIKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HappyUIKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		E3ACDD9D1E389ABA00497F78 /* HappyUIKitTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HappyUIKitTests.m; sourceTree = "<group>"; };
+		E3ACDD9F1E389ABA00497F78 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E3ACDDA91E389B2600497F78 /* _RDFlowLayoutSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _RDFlowLayoutSection.m; sourceTree = "<group>"; };
+		E3ACDDAA1E389B2600497F78 /* ScratchPadAsm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScratchPadAsm.h; sourceTree = "<group>"; };
+		E3ACDDAB1E389B2600497F78 /* ScratchPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScratchPad.h; sourceTree = "<group>"; };
+		E3ACDDAC1E389B2600497F78 /* _RDFlowLayoutSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _RDFlowLayoutSection.h; sourceTree = "<group>"; };
+		E3ACDDAD1E389B2600497F78 /* _RDFlowLayoutInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _RDFlowLayoutInfo.h; sourceTree = "<group>"; };
+		E3ACDDAE1E389B2600497F78 /* Symbols.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Symbols.txt; sourceTree = "<group>"; };
+		E3ACDDAF1E389B2600497F78 /* _RDFlowLayoutInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _RDFlowLayoutInfo.m; sourceTree = "<group>"; };
+		E3ACDDB01E389B2600497F78 /* RDCollectionViewLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDCollectionViewLayout.h; sourceTree = "<group>"; };
+		E3ACDDB11E389B2600497F78 /* RDCollectionViewFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDCollectionViewFlowLayout.h; sourceTree = "<group>"; };
+		E3ACDDB21E389B2600497F78 /* RDCollectionViewFlowLayoutInvalidationContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDCollectionViewFlowLayoutInvalidationContext.h; sourceTree = "<group>"; };
+		E3ACDDB31E389B2600497F78 /* RDCollectionViewLayoutInvalidationContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDCollectionViewLayoutInvalidationContext.h; sourceTree = "<group>"; };
+		E3ACDDB41E389B2600497F78 /* RDCollectionViewFlowLayoutInvalidationContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDCollectionViewFlowLayoutInvalidationContext.m; sourceTree = "<group>"; };
+		E3ACDDB51E389B2600497F78 /* RDCollectionViewLayoutInvalidationContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDCollectionViewLayoutInvalidationContext.m; sourceTree = "<group>"; };
+		E3ACDDB61E389B2600497F78 /* RDCollectionViewLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDCollectionViewLayout.m; sourceTree = "<group>"; };
+		E3ACDDB71E389B2600497F78 /* _RDFlowLayoutRow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _RDFlowLayoutRow.m; sourceTree = "<group>"; };
+		E3ACDDB81E389B2600497F78 /* HappyUIKitDefinitions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HappyUIKitDefinitions.h; sourceTree = "<group>"; };
+		E3ACDDB91E389B2600497F78 /* HappyUIKitDefinitions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HappyUIKitDefinitions.m; sourceTree = "<group>"; };
+		E3ACDDBA1E389B2600497F78 /* _RDFlowLayoutRow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _RDFlowLayoutRow.h; sourceTree = "<group>"; };
+		E3ACDDBB1E389B2600497F78 /* _RDFlowLayoutItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _RDFlowLayoutItem.m; sourceTree = "<group>"; };
+		E3ACDDBC1E389B2600497F78 /* _RDFlowLayoutItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _RDFlowLayoutItem.h; sourceTree = "<group>"; };
+		E3ACDDBD1E389B2600497F78 /* RDCollectionViewFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDCollectionViewFlowLayout.m; sourceTree = "<group>"; };
+		E3ACDDD51E389BC400497F78 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		E3ACDDDA1E389CAC00497F78 /* _UICollectionViewCompositionLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _UICollectionViewCompositionLayout.m; sourceTree = "<group>"; };
+		E3ACDDDB1E389CAC00497F78 /* UICollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UICollectionView.m; sourceTree = "<group>"; };
+		E3ACDDDC1E389CAC00497F78 /* UICollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UICollectionViewCell.m; sourceTree = "<group>"; };
+		E3ACDDDD1E389CAC00497F78 /* UICollectionViewData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UICollectionViewData.m; sourceTree = "<group>"; };
+		E3ACDDDE1E389CAC00497F78 /* UICollectionViewFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UICollectionViewFlowLayout.m; sourceTree = "<group>"; };
+		E3ACDDDF1E389CAC00497F78 /* UICollectionViewLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UICollectionViewLayout.m; sourceTree = "<group>"; };
+		E3ACDDE01E389CAC00497F78 /* UICollectionViewLayoutAttributes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UICollectionViewLayoutAttributes.m; sourceTree = "<group>"; };
+		E3ACDDE11E389CAC00497F78 /* UICollectionViewFlowLayoutInvalidationContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UICollectionViewFlowLayoutInvalidationContext.m; sourceTree = "<group>"; };
+		E3ACDDE21E389CAC00497F78 /* _UICollectionViewCompositionLayoutInvalidationContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _UICollectionViewCompositionLayoutInvalidationContext.m; sourceTree = "<group>"; };
+		E3ACDDE31E389CAC00497F78 /* UICollectionReusableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UICollectionReusableView.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		E3ACDD8B1E389ABA00497F78 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E3ACDD951E389ABA00497F78 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E3ACDD991E389ABA00497F78 /* HappyUIKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		E3ACDD851E389ABA00497F78 = {
+			isa = PBXGroup;
+			children = (
+				E3ACDD911E389ABA00497F78 /* HappyUIKit */,
+				E3ACDD9C1E389ABA00497F78 /* HappyUIKitTests */,
+				E3ACDD901E389ABA00497F78 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		E3ACDD901E389ABA00497F78 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				E3ACDD8F1E389ABA00497F78 /* HappyUIKit.framework */,
+				E3ACDD981E389ABA00497F78 /* HappyUIKitTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		E3ACDD911E389ABA00497F78 /* HappyUIKit */ = {
+			isa = PBXGroup;
+			children = (
+				E3ACDD921E389ABA00497F78 /* HappyUIKit.h */,
+				E3ACDDB81E389B2600497F78 /* HappyUIKitDefinitions.h */,
+				E3ACDDB91E389B2600497F78 /* HappyUIKitDefinitions.m */,
+				E3ACDD931E389ABA00497F78 /* Info.plist */,
+				E3ACDDD71E389BCD00497F78 /* CollectionView */,
+				E3ACDDD41E389BB500497F78 /* Docs */,
+				E3ACDDD31E389BA500497F78 /* Scratchpads */,
+			);
+			path = HappyUIKit;
+			sourceTree = "<group>";
+		};
+		E3ACDD9C1E389ABA00497F78 /* HappyUIKitTests */ = {
+			isa = PBXGroup;
+			children = (
+				E3ACDD9D1E389ABA00497F78 /* HappyUIKitTests.m */,
+				E3ACDD9F1E389ABA00497F78 /* Info.plist */,
+			);
+			path = HappyUIKitTests;
+			sourceTree = "<group>";
+		};
+		E3ACDDD31E389BA500497F78 /* Scratchpads */ = {
+			isa = PBXGroup;
+			children = (
+				E3ACDDAB1E389B2600497F78 /* ScratchPad.h */,
+				E3ACDDAA1E389B2600497F78 /* ScratchPadAsm.h */,
+			);
+			name = Scratchpads;
+			sourceTree = "<group>";
+		};
+		E3ACDDD41E389BB500497F78 /* Docs */ = {
+			isa = PBXGroup;
+			children = (
+				E3ACDDD51E389BC400497F78 /* README.md */,
+				E3ACDDAE1E389B2600497F78 /* Symbols.txt */,
+			);
+			name = Docs;
+			sourceTree = "<group>";
+		};
+		E3ACDDD71E389BCD00497F78 /* CollectionView */ = {
+			isa = PBXGroup;
+			children = (
+				E3ACDDD91E389C9100497F78 /* UI* */,
+				E3ACDDD81E389BDE00497F78 /* FlowLayoutData */,
+				E3ACDDB11E389B2600497F78 /* RDCollectionViewFlowLayout.h */,
+				E3ACDDBD1E389B2600497F78 /* RDCollectionViewFlowLayout.m */,
+				E3ACDDB21E389B2600497F78 /* RDCollectionViewFlowLayoutInvalidationContext.h */,
+				E3ACDDB41E389B2600497F78 /* RDCollectionViewFlowLayoutInvalidationContext.m */,
+				E3ACDDB01E389B2600497F78 /* RDCollectionViewLayout.h */,
+				E3ACDDB61E389B2600497F78 /* RDCollectionViewLayout.m */,
+				E3ACDDB31E389B2600497F78 /* RDCollectionViewLayoutInvalidationContext.h */,
+				E3ACDDB51E389B2600497F78 /* RDCollectionViewLayoutInvalidationContext.m */,
+			);
+			name = CollectionView;
+			sourceTree = "<group>";
+		};
+		E3ACDDD81E389BDE00497F78 /* FlowLayoutData */ = {
+			isa = PBXGroup;
+			children = (
+				E3ACDDAD1E389B2600497F78 /* _RDFlowLayoutInfo.h */,
+				E3ACDDAF1E389B2600497F78 /* _RDFlowLayoutInfo.m */,
+				E3ACDDBC1E389B2600497F78 /* _RDFlowLayoutItem.h */,
+				E3ACDDBB1E389B2600497F78 /* _RDFlowLayoutItem.m */,
+				E3ACDDBA1E389B2600497F78 /* _RDFlowLayoutRow.h */,
+				E3ACDDB71E389B2600497F78 /* _RDFlowLayoutRow.m */,
+				E3ACDDAC1E389B2600497F78 /* _RDFlowLayoutSection.h */,
+				E3ACDDA91E389B2600497F78 /* _RDFlowLayoutSection.m */,
+			);
+			name = FlowLayoutData;
+			sourceTree = "<group>";
+		};
+		E3ACDDD91E389C9100497F78 /* UI* */ = {
+			isa = PBXGroup;
+			children = (
+				E3ACDDDA1E389CAC00497F78 /* _UICollectionViewCompositionLayout.m */,
+				E3ACDDDB1E389CAC00497F78 /* UICollectionView.m */,
+				E3ACDDDC1E389CAC00497F78 /* UICollectionViewCell.m */,
+				E3ACDDDD1E389CAC00497F78 /* UICollectionViewData.m */,
+				E3ACDDDE1E389CAC00497F78 /* UICollectionViewFlowLayout.m */,
+				E3ACDDDF1E389CAC00497F78 /* UICollectionViewLayout.m */,
+				E3ACDDE01E389CAC00497F78 /* UICollectionViewLayoutAttributes.m */,
+				E3ACDDE11E389CAC00497F78 /* UICollectionViewFlowLayoutInvalidationContext.m */,
+				E3ACDDE21E389CAC00497F78 /* _UICollectionViewCompositionLayoutInvalidationContext.m */,
+				E3ACDDE31E389CAC00497F78 /* UICollectionReusableView.m */,
+			);
+			name = "UI*";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		E3ACDD8C1E389ABA00497F78 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E3ACDDC11E389B2600497F78 /* _RDFlowLayoutSection.h in Headers */,
+				E3ACDDA01E389ABA00497F78 /* HappyUIKit.h in Headers */,
+				E3ACDDC81E389B2600497F78 /* RDCollectionViewLayoutInvalidationContext.h in Headers */,
+				E3ACDDC01E389B2600497F78 /* ScratchPad.h in Headers */,
+				E3ACDDCF1E389B2600497F78 /* _RDFlowLayoutRow.h in Headers */,
+				E3ACDDC61E389B2600497F78 /* RDCollectionViewFlowLayout.h in Headers */,
+				E3ACDDCD1E389B2600497F78 /* HappyUIKitDefinitions.h in Headers */,
+				E3ACDDD11E389B2600497F78 /* _RDFlowLayoutItem.h in Headers */,
+				E3ACDDC51E389B2600497F78 /* RDCollectionViewLayout.h in Headers */,
+				E3ACDDC21E389B2600497F78 /* _RDFlowLayoutInfo.h in Headers */,
+				E3ACDDBF1E389B2600497F78 /* ScratchPadAsm.h in Headers */,
+				E3ACDDC71E389B2600497F78 /* RDCollectionViewFlowLayoutInvalidationContext.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		E3ACDD8E1E389ABA00497F78 /* HappyUIKit */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E3ACDDA31E389ABA00497F78 /* Build configuration list for PBXNativeTarget "HappyUIKit" */;
+			buildPhases = (
+				E3ACDD8A1E389ABA00497F78 /* Sources */,
+				E3ACDD8B1E389ABA00497F78 /* Frameworks */,
+				E3ACDD8C1E389ABA00497F78 /* Headers */,
+				E3ACDD8D1E389ABA00497F78 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = HappyUIKit;
+			productName = HappyUIKit;
+			productReference = E3ACDD8F1E389ABA00497F78 /* HappyUIKit.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		E3ACDD971E389ABA00497F78 /* HappyUIKitTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E3ACDDA61E389ABA00497F78 /* Build configuration list for PBXNativeTarget "HappyUIKitTests" */;
+			buildPhases = (
+				E3ACDD941E389ABA00497F78 /* Sources */,
+				E3ACDD951E389ABA00497F78 /* Frameworks */,
+				E3ACDD961E389ABA00497F78 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				E3ACDD9B1E389ABA00497F78 /* PBXTargetDependency */,
+			);
+			name = HappyUIKitTests;
+			productName = HappyUIKitTests;
+			productReference = E3ACDD981E389ABA00497F78 /* HappyUIKitTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		E3ACDD861E389ABA00497F78 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0820;
+				ORGANIZATIONNAME = RDI;
+				TargetAttributes = {
+					E3ACDD8E1E389ABA00497F78 = {
+						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = 468Z644D4Y;
+						ProvisioningStyle = Automatic;
+					};
+					E3ACDD971E389ABA00497F78 = {
+						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = 468Z644D4Y;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = E3ACDD891E389ABA00497F78 /* Build configuration list for PBXProject "HappyUIKit" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = E3ACDD851E389ABA00497F78;
+			productRefGroup = E3ACDD901E389ABA00497F78 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				E3ACDD8E1E389ABA00497F78 /* HappyUIKit */,
+				E3ACDD971E389ABA00497F78 /* HappyUIKitTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		E3ACDD8D1E389ABA00497F78 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E3ACDDC31E389B2600497F78 /* Symbols.txt in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E3ACDD961E389ABA00497F78 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		E3ACDD8A1E389ABA00497F78 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E3ACDDD01E389B2600497F78 /* _RDFlowLayoutItem.m in Sources */,
+				E3ACDDCC1E389B2600497F78 /* _RDFlowLayoutRow.m in Sources */,
+				E3ACDDD61E389BC400497F78 /* README.md in Sources */,
+				E3ACDDCA1E389B2600497F78 /* RDCollectionViewLayoutInvalidationContext.m in Sources */,
+				E3ACDDC91E389B2600497F78 /* RDCollectionViewFlowLayoutInvalidationContext.m in Sources */,
+				E3ACDDBE1E389B2600497F78 /* _RDFlowLayoutSection.m in Sources */,
+				E3ACDDCE1E389B2600497F78 /* HappyUIKitDefinitions.m in Sources */,
+				E3ACDDCB1E389B2600497F78 /* RDCollectionViewLayout.m in Sources */,
+				E3ACDDD21E389B2600497F78 /* RDCollectionViewFlowLayout.m in Sources */,
+				E3ACDDC41E389B2600497F78 /* _RDFlowLayoutInfo.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E3ACDD941E389ABA00497F78 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E3ACDD9E1E389ABA00497F78 /* HappyUIKitTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		E3ACDD9B1E389ABA00497F78 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E3ACDD8E1E389ABA00497F78 /* HappyUIKit */;
+			targetProxy = E3ACDD9A1E389ABA00497F78 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		E3ACDDA11E389ABA00497F78 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		E3ACDDA21E389ABA00497F78 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		E3ACDDA41E389ABA00497F78 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 468Z644D4Y;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = HappyUIKit/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.rdi.HappyUIKit;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		E3ACDDA51E389ABA00497F78 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 468Z644D4Y;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = HappyUIKit/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.rdi.HappyUIKit;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		E3ACDDA71E389ABA00497F78 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEVELOPMENT_TEAM = 468Z644D4Y;
+				INFOPLIST_FILE = HappyUIKitTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.rdi.HappyUIKitTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		E3ACDDA81E389ABA00497F78 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEVELOPMENT_TEAM = 468Z644D4Y;
+				INFOPLIST_FILE = HappyUIKitTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.rdi.HappyUIKitTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		E3ACDD891E389ABA00497F78 /* Build configuration list for PBXProject "HappyUIKit" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E3ACDDA11E389ABA00497F78 /* Debug */,
+				E3ACDDA21E389ABA00497F78 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E3ACDDA31E389ABA00497F78 /* Build configuration list for PBXNativeTarget "HappyUIKit" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E3ACDDA41E389ABA00497F78 /* Debug */,
+				E3ACDDA51E389ABA00497F78 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		E3ACDDA61E389ABA00497F78 /* Build configuration list for PBXNativeTarget "HappyUIKitTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E3ACDDA71E389ABA00497F78 /* Debug */,
+				E3ACDDA81E389ABA00497F78 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = E3ACDD861E389ABA00497F78 /* Project object */;
+}
