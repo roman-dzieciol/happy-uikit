@@ -8,28 +8,69 @@
 
 #import <UIKit/UIKit.h>
 
-NS_ASSUME_NONNULL_BEGIN
+@interface RDCollectionViewLayoutInvalidationContext : NSObject {
+    CGPoint  _contentOffsetAdjustment;
+    CGSize  _contentSizeAdjustment;
+    bool  _initiatedFromReloadData;
+    NSMutableDictionary * _invalidatedDecorationIndexPaths;
+    NSMutableSet * _invalidatedItemIndexPaths;
+    NSMutableDictionary * _invalidatedSupplementaryIndexPaths;
+    struct {
+        unsigned int invalidateDataSource : 1;
+        unsigned int invalidateEverything : 1;
+    }  _invalidationContextFlags;
+    NSArray * _previousIndexPathsForReorderedItems;
+    CGPoint  _reorderingTarget;
+    bool  _retainExistingSizingInfoForEstimates;
+    NSArray * _targetIndexPathsForReorderedItems;
+    NSArray * _updateItems;
+}
 
-@interface RDCollectionViewLayoutInvalidationContext : NSObject
+@property (nonatomic) CGPoint contentOffsetAdjustment;
+@property (nonatomic) CGSize contentSizeAdjustment;
+@property (getter=_initiatedFromReloadData, setter=_setInitiatedFromReloadData:, nonatomic) bool initiatedFromReloadData;
+@property (setter=_setInteractiveMovementTarget:, nonatomic) CGPoint interactiveMovementTarget;
+@property (setter=_setInvalidateDataSourceCounts:, nonatomic) bool invalidateDataSourceCounts;
+@property (setter=_setInvalidateEverything:, nonatomic) bool invalidateEverything;
+@property (nonatomic, readonly) NSDictionary *invalidatedDecorationIndexPaths;
+@property (nonatomic, readonly) NSArray *invalidatedItemIndexPaths;
+@property (nonatomic, readonly) NSDictionary *invalidatedSupplementaryIndexPaths;
+@property (setter=_setPreviousIndexPathsForInteractivelyMovingItems:, nonatomic, copy) NSArray *previousIndexPathsForInteractivelyMovingItems;
+@property (getter=_retainExistingSizingInfoForEstimates, setter=_setRetainExistingSizingInfoForEstimates:, nonatomic) bool retainExistingSizingInfoForEstimates;
+@property (setter=_setTargetIndexPathsForInteractivelyMovingItems:, nonatomic, copy) NSArray *targetIndexPathsForInteractivelyMovingItems;
+@property (getter=_updateItems, setter=_setUpdateItems:, nonatomic, retain) NSArray *updateItems;
 
-@property (nonatomic, readonly) BOOL invalidateEverything; // set to YES when invalidation occurs because the collection view is sent -reloadData
-@property (nonatomic, readonly) BOOL invalidateDataSourceCounts; // if YES, the layout should requery section and item counts from the collection view - set to YES when the collection view is sent -reloadData and when items are inserted or deleted
-
-- (void)invalidateItemsAtIndexPaths:(NSArray<NSIndexPath *> *)indexPaths;
-- (void)invalidateSupplementaryElementsOfKind:(NSString *)elementKind atIndexPaths:(NSArray<NSIndexPath *> *)indexPaths;
-- (void)invalidateDecorationElementsOfKind:(NSString *)elementKind atIndexPaths:(NSArray<NSIndexPath *> *)indexPaths;
-@property (nonatomic, readonly, nullable) NSArray<NSIndexPath *> *invalidatedItemIndexPaths;
-@property (nonatomic, readonly, nullable) NSDictionary<NSString *, NSArray<NSIndexPath *> *> *invalidatedSupplementaryIndexPaths; // keys are element kind strings - values are NSArrays of NSIndexPaths
-@property (nonatomic, readonly, nullable) NSDictionary<NSString *, NSArray<NSIndexPath *> *> *invalidatedDecorationIndexPaths; // keys are element kind strings - values are NSArrays of NSIndexPaths
-
-@property (nonatomic) CGPoint contentOffsetAdjustment; // delta to be applied to the collection view's current contentOffset - default is CGPointZero
-@property (nonatomic) CGSize contentSizeAdjustment; // delta to be applied to the current content size - default is CGSizeZero
-
-// Reordering support
-@property (nonatomic, readonly, copy, nullable) NSArray<NSIndexPath *> *previousIndexPathsForInteractivelyMovingItems; // index paths of moving items prior to the invalidation
-@property (nonatomic, readonly, copy, nullable) NSArray<NSIndexPath *> *targetIndexPathsForInteractivelyMovingItems; // index paths of moved items following the invalidation
-@property (nonatomic, readonly) CGPoint interactiveMovementTarget;
+//- (void).cxx_destruct;
+- (bool)_initiatedFromReloadData;
+- (void)_invalidateSupplementaryElementsOfKind:(id)arg1 atIndexPaths:(id)arg2;
+- (id)_invalidatedSupplementaryViews;
+- (bool)_retainExistingSizingInfoForEstimates;
+- (void)_setInitiatedFromReloadData:(bool)arg1;
+- (void)_setInteractiveMovementTarget:(CGPoint)arg1;
+- (void)_setInvalidateDataSourceCounts:(bool)arg1;
+- (void)_setInvalidateEverything:(bool)arg1;
+- (void)_setInvalidatedSupplementaryViews:(id)arg1;
+- (void)_setPreviousIndexPathsForInteractivelyMovingItems:(NSArray *)arg1;
+- (void)_setRetainExistingSizingInfoForEstimates:(bool)arg1;
+- (void)_setTargetIndexPathsForInteractivelyMovingItems:(NSArray *)arg1;
+- (void)_setUpdateItems:(NSArray *)arg1;
+- (id)_updateItems;
+- (CGPoint)contentOffsetAdjustment;
+- (CGSize)contentSizeAdjustment;
+- (CGPoint)interactiveMovementTarget;
+- (bool)invalidateDataSourceCounts;
+- (void)invalidateDecorationElementsOfKind:(id)arg1 atIndexPaths:(id)arg2;
+- (bool)invalidateEverything;
+- (void)invalidateItemsAtIndexPaths:(id)arg1;
+- (void)invalidateSupplementaryElementsOfKind:(id)arg1 atIndexPaths:(id)arg2;
+- (id)invalidatedDecorationIndexPaths;
+- (id)invalidatedItemIndexPaths;
+- (id)invalidatedSupplementaryIndexPaths;
+- (NSArray *)previousIndexPathsForInteractivelyMovingItems;
+- (void)setContentOffsetAdjustment:(CGPoint)arg1;
+- (void)setContentSizeAdjustment:(CGSize)arg1;
+- (id)targetIndexPathsForInteractivelyMovingItems;
 
 @end
 
-NS_ASSUME_NONNULL_END
+

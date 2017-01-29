@@ -30,6 +30,12 @@ typedef NS_ENUM(NSInteger, RDCollectionUpdateAction) {
     RDCollectionUpdateActionNone
 };
 
+typedef NS_ENUM(NSUInteger, RDCollectionElementCategory) {
+    RDCollectionElementCategoryCell,
+    RDCollectionElementCategorySupplementaryView,
+    RDCollectionElementCategoryDecorationView
+};
+
 @interface HappyUIKitDefinitions : NSObject
 
 @end

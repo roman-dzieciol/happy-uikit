@@ -20,7 +20,7 @@
     NSMutableArray * _deletedSupplementaryIndexesSectionArray;
     NSMutableDictionary * _deletedSupplementaryTopLevelIndexesDict;
     NSMutableIndexSet * _insertedSections;
-    NSMutableArray * _insertedSupplementaryIndexesSectionArray;
+    @public NSMutableArray * _insertedSupplementaryIndexesSectionArray;
     NSMutableDictionary * _insertedSupplementaryTopLevelIndexesDict;
     NSMutableIndexSet * _movedItems;
     NSMutableIndexSet * _movedSections;

@@ -10,4 +10,12 @@
 
 @implementation RDCollectionViewLayoutInvalidationContext
 
+- (NSArray *)invalidatedItemIndexPaths {
+    return nil;
+}
+
+- (void)setInvalidatedItemIndexPaths:(NSArray *)invalidatedItemIndexPaths {
+    
+}
+
 @end

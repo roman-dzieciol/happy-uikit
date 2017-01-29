@@ -22,7 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
     RDDynamicAnimator * _animator;
     RDCollectionView * _collectionView;
     CGSize  _collectionViewBoundsSize;
-     _RDCollectionViewCompositionLayout  * _compositionLayout;
+    __weak _RDCollectionViewCompositionLayout  * _compositionLayout;
     NSMutableDictionary * _decorationViewClassDict;
     NSMutableDictionary * _decorationViewExternalObjectsTables;
     NSMutableDictionary * _decorationViewNibDict;
@@ -55,7 +55,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (setter=_setWantsRightToLeftHorizontalMirroringIfNeeded:, nonatomic) bool _wantsRightToLeftHorizontalMirroringIfNeeded;
 @property (nonatomic, readonly) RDCollectionView *collectionView;
-@property (getter=_compositionLayout, setter=_setCompositionLayout:, nonatomic) _RDCollectionViewCompositionLayout *compositionLayout;
+@property (getter=_compositionLayout, setter=_setCompositionLayout:, nonatomic, weak) _RDCollectionViewCompositionLayout *compositionLayout;
 @property (getter=_elementKinds, setter=_setElementKinds:, nonatomic, copy) NSArray *elementKinds;
 @property (getter=_frame, setter=_setFrame:, nonatomic) CGRect frame;
 @property (getter=_items, setter=_setItems:, nonatomic, copy) NSIndexSet *items;
@@ -76,7 +76,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (id /* block */)_animationForReusableView:(id)arg1 toLayoutAttributes:(id)arg2 type:(NSUInteger)arg3;
 - (CGRect)_bounds;
 - (bool)_cellsShouldConferWithAutolayoutEngineForSizingInfo;
-- ( _RDCollectionViewCompositionLayout *)_compositionLayout;
+- (__weak _RDCollectionViewCompositionLayout *)_compositionLayout;
 - (id)_decorationViewForLayoutAttributes:(id)arg1;
 - (void)_didFinishLayoutTransitionAnimations:(bool)arg1;
 - (id)_dynamicAnimator;
@@ -142,10 +142,10 @@ NS_ASSUME_NONNULL_BEGIN
 - (id)indexPathsToInsertForDecorationViewOfKind:(id)arg1;
 - (id)indexPathsToInsertForSupplementaryViewOfKind:(id)arg1;
 - (id)init;
-- (id)initWithCoder:(id)arg1;
-- (id)initialLayoutAttributesForAppearingDecorationElementOfKind:(id)arg1 atIndexPath:(id)arg2;
-- (id)initialLayoutAttributesForAppearingItemAtIndexPath:(id)arg1;
-- (id)initialLayoutAttributesForAppearingSupplementaryElementOfKind:(id)arg1 atIndexPath:(id)arg2;
+- (nullable instancetype)initWithCoder:(NSCoder *)aDecoder;
+- (nullable RDCollectionViewLayoutAttributes *)initialLayoutAttributesForAppearingDecorationElementOfKind:(id)arg1 atIndexPath:(id)arg2;
+- (nullable RDCollectionViewLayoutAttributes *)initialLayoutAttributesForAppearingItemAtIndexPath:(id)arg1;
+- (nullable RDCollectionViewLayoutAttributes *)initialLayoutAttributesForAppearingSupplementaryElementOfKind:(id)arg1 atIndexPath:(id)arg2;
 - (void)invalidateLayout;
 - (void)invalidateLayoutWithContext:(id)arg1;
 - (id)invalidationContextForBoundsChange:(CGRect)arg1;
@@ -153,11 +153,11 @@ NS_ASSUME_NONNULL_BEGIN
 - (id)invalidationContextForInteractivelyMovingItems:(id)arg1 withTargetPosition:(CGPoint)arg2 previousIndexPaths:(id)arg3 previousPosition:(CGPoint)arg4;
 - (id)invalidationContextForPreferredLayoutAttributes:(id)arg1 withOriginalAttributes:(id)arg2;
 - (bool)isEditing;
-- (id)layoutAttributesForDecorationViewOfKind:(id)arg1 atIndexPath:(id)arg2;
+- (nullable RDCollectionViewLayoutAttributes *)layoutAttributesForDecorationViewOfKind:(id)arg1 atIndexPath:(id)arg2;
 - (nullable NSArray<__kindof UICollectionViewLayoutAttributes *> *)layoutAttributesForElementsInRect:(CGRect)rect;
 - (id)layoutAttributesForInteractivelyMovingItemAtIndexPath:(id)arg1 withTargetPosition:(CGPoint)arg2;
-- (id)layoutAttributesForItemAtIndexPath:(id)arg1;
-- (id)layoutAttributesForSupplementaryViewOfKind:(id)arg1 atIndexPath:(id)arg2;
+- (nullable UICollectionViewLayoutAttributes *)layoutAttributesForItemAtIndexPath:(id)arg1;
+- (nullable UICollectionViewLayoutAttributes *)layoutAttributesForSupplementaryViewOfKind:(id)arg1 atIndexPath:(id)arg2;
 - (void)prepareForAnimatedBoundsChange:(CGRect)arg1;
 - (void)prepareForCollectionViewUpdates:(id)arg1;
 - (void)prepareForTransitionFromLayout:(id)arg1;

@@ -15,6 +15,10 @@
 #import "RDCollectionViewData.h"
 #import "_RDCollectionViewItemKey.h"
 #import "RDCollectionViewUpdateItem.h"
+#import "RDCollectionViewLayoutInvalidationContext.h"
+
+
+
 
 @implementation RDCollectionViewLayout
 
@@ -86,12 +90,12 @@
 
 - (void)encodeWithCoder:(NSCoder *)aCoder;
 
-- (nullable UICollectionViewLayoutAttributes *)finalLayoutAttributesForDisappearingDecorationElementOfKind:(NSString *)elementKind atIndexPath:(NSIndexPath *)decorationIndexPath;
+- (nullable RDCollectionViewLayoutAttributes *)finalLayoutAttributesForDisappearingDecorationElementOfKind:(NSString *)elementKind atIndexPath:(NSIndexPath *)decorationIndexPath;
 
-- (nullable UICollectionViewLayoutAttributes *)finalLayoutAttributesForDisappearingItemAtIndexPath:(NSIndexPath *)itemIndexPath;
+- (nullable RDCollectionViewLayoutAttributes *)finalLayoutAttributesForDisappearingItemAtIndexPath:(NSIndexPath *)itemIndexPath;
 
 
-- (nullable UICollectionViewLayoutAttributes *)finalLayoutAttributesForDisappearingSupplementaryElementOfKind:(NSString *)elementKind atIndexPath:(NSIndexPath *)elementIndexPath;
+- (nullable RDCollectionViewLayoutAttributes *)finalLayoutAttributesForDisappearingSupplementaryElementOfKind:(NSString *)elementKind atIndexPath:(NSIndexPath *)elementIndexPath;
 
 - (void)finalizeAnimatedBoundsChange;
 - (void)finalizeCollectionViewUpdates;
@@ -107,43 +111,293 @@
 
 - (id)init;
 
-- (nullable instancetype)initWithCoder:(NSCoder *)aDecoder;
-
-- (nullable UICollectionViewLayoutAttributes *)initialLayoutAttributesForAppearingDecorationElementOfKind:(NSString *)elementKind atIndexPath:(NSIndexPath *)decorationIndexPath;
-
-- (nullable UICollectionViewLayoutAttributes *)initialLayoutAttributesForAppearingItemAtIndexPath:(NSIndexPath *)itemIndexPath;
-- (nullable UICollectionViewLayoutAttributes *)initialLayoutAttributesForAppearingSupplementaryElementOfKind:(NSString *)elementKind atIndexPath:(NSIndexPath *)elementIndexPath;
-
-- (void)invalidateLayout;
-- (void)invalidateLayoutWithContext:(UICollectionViewLayoutInvalidationContext *)context
-
-- (UICollectionViewLayoutInvalidationContext *)invalidationContextForBoundsChange:(CGRect)newBounds;
-
-- (UICollectionViewLayoutInvalidationContext *)invalidationContextForEndingInteractiveMovementOfItemsToFinalIndexPaths:(NSArray<NSIndexPath *> *)indexPaths previousIndexPaths:(NSArray<NSIndexPath *> *)previousIndexPaths movementCancelled:(BOOL)movementCancelled;
-
-- (UICollectionViewLayoutInvalidationContext *)invalidationContextForInteractivelyMovingItems:(NSArray<NSIndexPath *> *)targetIndexPaths withTargetPosition:(CGPoint)targetPosition previousIndexPaths:(NSArray<NSIndexPath *> *)previousIndexPaths previousPosition:(CGPoint)previousPosition;
-
-- (UICollectionViewLayoutInvalidationContext *)invalidationContextForPreferredLayoutAttributes:(UICollectionViewLayoutAttributes *)preferredAttributes withOriginalAttributes:(UICollectionViewLayoutAttributes *)originalAttributes;
-- (BOOL)isEditing;
-- (nullable UICollectionViewLayoutAttributes *)layoutAttributesForDecorationViewOfKind:(NSString*)elementKind atIndexPath:(NSIndexPath *)indexPath;
 #endif
 
+// TODO: Verify & Refactor for same output
+- (nullable RDCollectionViewLayoutAttributes *)initialLayoutAttributesForAppearingDecorationElementOfKind:(NSString *)elementKind atIndexPath:(NSIndexPath *)decorationIndexPath {
+    
+    _RDCollectionViewItemKey *key = [_RDCollectionViewItemKey collectionItemKeyForDecorationViewOfKind:elementKind andIndexPath:decorationIndexPath];
+    
+    RDCollectionViewLayoutAttributes *attribute = [_initialAnimationLayoutAttributesDict objectForKey:key];
+    
+    
+    if (attribute == nil) {
+        if (decorationIndexPath.length != 1) {
+            if (decorationIndexPath.section < _collectionView.numberOfSections) {
+                
+                if (_transitioningFromLayout != nil && _layoutFlags.prepared == NO) {
+                    attribute = [_transitioningFromLayout layoutAttributesForDecorationViewOfKind:elementKind atIndexPath:decorationIndexPath];
+                } else {
+                    attribute = [self layoutAttributesForDecorationViewOfKind:elementKind atIndexPath:decorationIndexPath];
+                }
+            }
+        }
+        else {
+            
+            if (_transitioningFromLayout != nil && _layoutFlags.prepared == NO) {
+                attribute = [_transitioningFromLayout layoutAttributesForDecorationViewOfKind:elementKind atIndexPath:decorationIndexPath];
+            } else {
+                attribute = [self layoutAttributesForDecorationViewOfKind:elementKind atIndexPath:decorationIndexPath];
+            }
+            
+        }
+    }
+    
+    NSInteger sectionIndex = NSIntegerMax;
+    if (decorationIndexPath.length >= 2) {
+        sectionIndex = decorationIndexPath.section;
+    }
+    
+    RDCollectionViewUpdate *update = [_collectionView _currentUpdate];
+    if (update) {
+        if (sectionIndex != NSIntegerMax) {
+            if ([_insertedSectionsSet containsIndex:decorationIndexPath.section] == NO) {
+                NSDictionary *sectionDictionary = update->_insertedSupplementaryIndexesSectionArray[decorationIndexPath.section];
+                NSIndexSet *sectionArray = [sectionDictionary valueForKey:elementKind];
+                if ([sectionArray containsIndex:decorationIndexPath.item]) {
+                    if (_transitioningFromLayout) {
+                        return attribute;
+                    } else {
+                        attribute = [attribute copy];
+                        attribute.alpha = 0.0; // TODO: Verify
+                        return attribute;
+                    }
+                } else {
+                    return attribute;
+                }
+            } else {
+                if (_transitioningFromLayout) {
+                    return attribute;
+                } else {
+                    attribute = [attribute copy];
+                    attribute.alpha = 0.0; // TODO: Verify
+                    return attribute;
+                }
+            }
+        } else {
+            return attribute;
+        }
+    } else {
+        if (_transitioningFromLayout) {
+            return attribute;
+        } else {
+            attribute = [attribute copy];
+            attribute.alpha = 0.0; // TODO: Verify
+            return attribute;
+        }
+    }
+}
 
-- (nullable NSArray<__kindof UICollectionViewLayoutAttributes *> *)layoutAttributesForElementsInRect:(CGRect)rect {
+
+// TODO: Verify & Refactor for same output
+- (nullable RDCollectionViewLayoutAttributes *)initialLayoutAttributesForAppearingItemAtIndexPath:(NSIndexPath *)itemIndexPath {
+    _RDCollectionViewItemKey *key = [_RDCollectionViewItemKey collectionItemKeyForCellWithIndexPath:itemIndexPath];
+    
+    RDCollectionViewLayoutAttributes *attribute = [_initialAnimationLayoutAttributesDict objectForKey:key];
+    if (attribute == nil) {
+        if (itemIndexPath.section < _collectionView.numberOfSections) {
+            if (itemIndexPath.item < [_collectionView numberOfItemsInSection:itemIndexPath.section]) {
+                
+                if (_transitioningFromLayout != nil && _layoutFlags.prepared == NO) {
+                    attribute = [_transitioningFromLayout layoutAttributesForItemAtIndexPath:itemIndexPath];
+                } else {
+                    attribute = [self layoutAttributesForItemAtIndexPath:itemIndexPath];
+                }
+            }
+        }
+    }
+    
+    
+    RDCollectionViewUpdate *update = [_collectionView _currentUpdate];
+    if (update) {
+        if ([_insertedSectionsSet containsIndex:itemIndexPath.section]) {
+            if (_transitioningFromLayout == NO) {
+                attribute = [attribute copy];
+                attribute.alpha = 0.0; // Verify
+            }
+        }
+    } else {
+        if (_transitioningFromLayout == NO) {
+            attribute = [attribute copy];
+            attribute.alpha = 0.0; // Verify
+        }
+    }
+    return attribute;
+}
+
+// TODO: Verify & Refactor for same output
+- (nullable RDCollectionViewLayoutAttributes *)initialLayoutAttributesForAppearingSupplementaryElementOfKind:(NSString *)elementKind atIndexPath:(NSIndexPath *)elementIndexPath {
+    
+    _RDCollectionViewItemKey *key = [_RDCollectionViewItemKey collectionItemKeyForSupplementaryViewOfKind:elementKind andIndexPath:elementIndexPath];
+    
+    RDCollectionViewLayoutAttributes *attribute = [_initialAnimationLayoutAttributesDict objectForKey:key];
+    if (attribute == nil) {
+        if (elementIndexPath.length != 1) {
+            if (elementIndexPath.section < _collectionView.numberOfSections) {
+                
+                if (_transitioningFromLayout != nil && _layoutFlags.prepared == NO) {
+                    attribute = [_transitioningFromLayout layoutAttributesForSupplementaryViewOfKind:elementKind atIndexPath:elementIndexPath];
+                } else {
+                    attribute = [self layoutAttributesForSupplementaryViewOfKind:elementKind atIndexPath:elementIndexPath];
+                }
+            }
+        }
+        else {
+            
+            if (_transitioningFromLayout != nil && _layoutFlags.prepared == NO) {
+                attribute = [_transitioningFromLayout layoutAttributesForSupplementaryViewOfKind:elementKind atIndexPath:elementIndexPath];
+            } else {
+                attribute = [self layoutAttributesForSupplementaryViewOfKind:elementKind atIndexPath:elementIndexPath];
+            }
+            
+        }
+    }
+    
+    NSInteger sectionIndex = NSIntegerMax;
+    if (elementIndexPath.length >= 2) {
+        sectionIndex = elementIndexPath.section;
+    }
+    
+    RDCollectionViewUpdate *update = [_collectionView _currentUpdate];
+    if (update) {
+        if (sectionIndex != NSIntegerMax) {
+            if ([_insertedSectionsSet containsIndex:elementIndexPath.section] == NO) {
+                NSDictionary *sectionDictionary = update->_insertedSupplementaryIndexesSectionArray[elementIndexPath.section];
+                NSIndexSet *sectionArray = [sectionDictionary valueForKey:elementKind];
+                if ([sectionArray containsIndex:elementIndexPath.item]) {
+                    if (_transitioningFromLayout) {
+                        return attribute;
+                    } else {
+                        attribute = [attribute copy];
+                        attribute.alpha = 0.0; // TODO: Verify
+                        return attribute;
+                    }
+                } else {
+                    return attribute;
+                }
+            } else {
+                if (_transitioningFromLayout) {
+                    return attribute;
+                } else {
+                    attribute = [attribute copy];
+                    attribute.alpha = 0.0; // TODO: Verify
+                    return attribute;
+                }
+            }
+        } else {
+            return attribute;
+        }
+    } else {
+        if (_transitioningFromLayout) {
+            return attribute;
+        } else {
+            attribute = [attribute copy];
+            attribute.alpha = 0.0; // TODO: Verify
+            return attribute;
+        }
+    }
+}
+
+
+
+- (nullable instancetype)initWithCoder:(NSCoder *)aDecoder {
+    self = [super init];
+    if (self) {
+        _decorationViewNibDict = [aDecoder decodeObjectForKey:@"UICollectionViewDecorationViewNibDict"];
+        _decorationViewExternalObjectsTables = [aDecoder decodeObjectForKey:@"UICollectionViewDecorationViewPrototypeNibExternalObjects"];
+        // TODO
+//        _decorationViewExternalObjectsTables = _mutableDictionaryByTransformingLeafDictionariesToWeakValued();
+//        _RDCollectionViewLayoutCommonInit();
+    }
+    return self;
+}
+
+
+- (void)invalidateLayout {
+    if (_invalidationContext) {
+        [self invalidateLayoutWithContext:_invalidationContext];
+    } else {
+        [self invalidateLayoutWithContext:[[[[self class] invalidationContextClass] alloc] init]];
+    }
+}
+
+- (void)invalidateLayoutWithContext:(RDCollectionViewLayoutInvalidationContext *)context {
+    // TODO: Verify
+    RDCollectionViewLayout *layout = self;
+    while ([layout _compositionLayout] != nil) {
+        layout = [layout _compositionLayout];
+    }
+    
+    [[layout collectionView] _invalidateLayoutWithContext:context];
+}
+
+- (RDCollectionViewLayoutInvalidationContext *)invalidationContextForBoundsChange:(CGRect)newBounds {
+    return [[[[self class] invalidationContextClass] alloc] init];
+}
+
+- (RDCollectionViewLayoutInvalidationContext *)invalidationContextForEndingInteractiveMovementOfItemsToFinalIndexPaths:(NSArray<NSIndexPath *> *)indexPaths previousIndexPaths:(NSArray<NSIndexPath *> *)previousIndexPaths movementCancelled:(BOOL)movementCancelled {
+    
+    RDCollectionViewLayoutInvalidationContext *context = [[[[self class] invalidationContextClass] alloc] init];
+    
+    [context _setPreviousIndexPathsForInteractivelyMovingItems:previousIndexPaths];
+    [context _setTargetIndexPathsForInteractivelyMovingItems:indexPaths];
+    if ([indexPaths isEqual:previousIndexPaths]) {
+        [context invalidateItemsAtIndexPaths:indexPaths];
+    }
+    return context;
+}
+
+- (RDCollectionViewLayoutInvalidationContext *)invalidationContextForInteractivelyMovingItems:(NSArray<NSIndexPath *> *)targetIndexPaths withTargetPosition:(CGPoint)targetPosition previousIndexPaths:(NSArray<NSIndexPath *> *)previousIndexPaths previousPosition:(CGPoint)previousPosition {
+    
+    RDCollectionViewLayoutInvalidationContext *context = [[[[self class] invalidationContextClass] alloc] init];
+    
+    [context _setPreviousIndexPathsForInteractivelyMovingItems:previousIndexPaths];
+    [context _setTargetIndexPathsForInteractivelyMovingItems:targetIndexPaths];
+    [context _setInteractiveMovementTarget:targetPosition];
+    if ([targetIndexPaths isEqual:previousIndexPaths]) {
+        [context invalidateItemsAtIndexPaths:targetIndexPaths];
+    }
+    
+    return context;
+}
+
+- (RDCollectionViewLayoutInvalidationContext *)invalidationContextForPreferredLayoutAttributes:(RDCollectionViewLayoutAttributes *)preferredAttributes withOriginalAttributes:(RDCollectionViewLayoutAttributes *)originalAttributes {
+    return [[[[self class] invalidationContextClass] alloc] init];
+}
+
+- (BOOL)isEditing {
+    return NO;
+}
+
+- (nullable RDCollectionViewLayoutAttributes *)layoutAttributesForDecorationViewOfKind:(NSString*)elementKind atIndexPath:(NSIndexPath *)indexPath {
     return nil;
 }
 
-#if 0
-- (UICollectionViewLayoutAttributes *)layoutAttributesForInteractivelyMovingItemAtIndexPath:(NSIndexPath *)indexPath withTargetPosition:(CGPoint)position;
-- (nullable UICollectionViewLayoutAttributes *)layoutAttributesForItemAtIndexPath:(NSIndexPath *)indexPath;
-- (nullable UICollectionViewLayoutAttributes *)layoutAttributesForSupplementaryViewOfKind:(NSString *)elementKind atIndexPath:(NSIndexPath *)indexPath;
-- (void)prepareForAnimatedBoundsChange:(CGRect)oldBounds;
+- (nullable NSArray<__kindof RDCollectionViewLayoutAttributes *> *)layoutAttributesForElementsInRect:(CGRect)rect {
+    return nil;
+}
 
+- (RDCollectionViewLayoutAttributes *)layoutAttributesForInteractivelyMovingItemAtIndexPath:(NSIndexPath *)indexPath withTargetPosition:(CGPoint)position {
+    RDCollectionViewLayoutAttributes *attributes = [[self layoutAttributesForItemAtIndexPath:indexPath] copy];
+    [attributes setCenter:position];
+    [attributes setZIndex:NSIntegerMax];
+    return attributes;
+}
 
-#endif
+- (nullable RDCollectionViewLayoutAttributes *)layoutAttributesForItemAtIndexPath:(NSIndexPath *)indexPath {
+    return nil;
+}
+
+- (nullable RDCollectionViewLayoutAttributes *)layoutAttributesForSupplementaryViewOfKind:(NSString *)elementKind atIndexPath:(NSIndexPath *)indexPath {
+    return nil;
+}
+
+- (void)prepareForAnimatedBoundsChange:(CGRect)oldBounds {
+    // no implementation
+}
 
 // TODO: Refactor so it outputs the same binary
-- (void)prepareForCollectionViewUpdates:(NSArray<UICollectionViewUpdateItem *> *)updateItems {
+- (void)prepareForCollectionViewUpdates:(NSArray<RDCollectionViewUpdateItem *> *)updateItems {
     
     RDCollectionViewUpdate *update = [_collectionView _currentUpdate];
     
@@ -307,11 +561,11 @@
     }
 }
 
-- (void)prepareForTransitionFromLayout:(UICollectionViewLayout *)oldLayout {
+- (void)prepareForTransitionFromLayout:(RDCollectionViewLayout *)oldLayout {
     // not implementated
 }
 
-- (void)prepareForTransitionToLayout:(UICollectionViewLayout *)newLayout {
+- (void)prepareForTransitionToLayout:(RDCollectionViewLayout *)newLayout {
     // not implementated
 }
 
@@ -378,7 +632,7 @@
     
     RDCollectionViewLayoutAttributes *topmostAttribute = nil;
     for (RDCollectionViewLayoutAttributes *attribute in attributes) {
-        if (UICollectionElementCategoryCell == [attribute representedElementCategory]) {
+        if (RDCollectionElementCategoryCell == [attribute representedElementCategory]) {
             if (topmostAttribute != nil) {
                 if (attribute.zIndex > topmostAttribute.zIndex) {
                     topmostAttribute = attribute;
