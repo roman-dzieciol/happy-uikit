@@ -1307,7 +1307,12 @@ void -[UICollectionViewFlowLayout _resetCachedItems](void * self, void * _cmd) {
     return;
 }
 struct CGSize -[UICollectionViewFlowLayout _effectiveEstimatedItemSize](void * self, void * _cmd) {
+    
+    if (CGSizeEqual)
+    
     rdi = self;
+    
+    
     rax = *_OBJC_IVAR_$_UICollectionViewFlowLayout._estimatedItemSize;
     xmm0 = intrinsic_movsd(xmm0, *(rdi + rax));
     xmm1 = intrinsic_movsd(xmm1, *(rdi + rax + 0x8));

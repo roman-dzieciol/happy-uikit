@@ -20,6 +20,16 @@ extern const int _RDFlowLayoutAlignment_1;
 extern const int _RDFlowLayoutAlignment_2;
 extern const int _RDFlowLayoutAlignment_3;
 
+extern const NSUInteger _RD_AutomaticDimension;
+
+typedef NS_ENUM(NSInteger, RDCollectionUpdateAction) {
+    RDCollectionUpdateActionInsert,
+    RDCollectionUpdateActionDelete,
+    RDCollectionUpdateActionReload,
+    RDCollectionUpdateActionMove,
+    RDCollectionUpdateActionNone
+};
+
 @interface HappyUIKitDefinitions : NSObject
 
 @end
