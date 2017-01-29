@@ -131,9 +131,9 @@ NS_ASSUME_NONNULL_BEGIN
 - (CGRect)convertRect:(CGRect)arg1 fromLayout:(id)arg2;
 - (CGRect)convertRect:(CGRect)arg1 toLayout:(id)arg2;
 - (void)encodeWithCoder:(id)arg1;
-- (id)finalLayoutAttributesForDisappearingDecorationElementOfKind:(id)arg1 atIndexPath:(id)arg2;
-- (id)finalLayoutAttributesForDisappearingItemAtIndexPath:(id)arg1;
-- (id)finalLayoutAttributesForDisappearingSupplementaryElementOfKind:(id)arg1 atIndexPath:(id)arg2;
+- (nullable RDCollectionViewLayoutAttributes *)finalLayoutAttributesForDisappearingDecorationElementOfKind:(id)arg1 atIndexPath:(id)arg2;
+- (nullable RDCollectionViewLayoutAttributes *)finalLayoutAttributesForDisappearingItemAtIndexPath:(id)arg1;
+- (nullable RDCollectionViewLayoutAttributes *)finalLayoutAttributesForDisappearingSupplementaryElementOfKind:(id)arg1 atIndexPath:(id)arg2;
 - (void)finalizeAnimatedBoundsChange;
 - (void)finalizeCollectionViewUpdates;
 - (void)finalizeLayoutTransition;

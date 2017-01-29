@@ -17,7 +17,7 @@
     id _animatedItems;
     RDCollectionView * _collectionView;
     NSMutableIndexSet * _deletedSections;
-    NSMutableArray * _deletedSupplementaryIndexesSectionArray;
+    @public NSMutableArray * _deletedSupplementaryIndexesSectionArray;
     NSMutableDictionary * _deletedSupplementaryTopLevelIndexesDict;
     NSMutableIndexSet * _insertedSections;
     @public NSMutableArray * _insertedSupplementaryIndexesSectionArray;
