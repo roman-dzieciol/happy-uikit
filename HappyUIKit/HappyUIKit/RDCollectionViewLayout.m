@@ -20,8 +20,21 @@
 #import "_RDCollectionViewCompositionLayout.h"
 
 
+
+
+
 @implementation RDCollectionViewLayout
 
+void _RDCollectionViewLayoutCommonInit(RDCollectionViewLayout *self) {
+    self->_initialAnimationLayoutAttributesDict = [[NSMutableDictionary alloc] init];
+    self->_finalAnimationLayoutAttributesDict = [[NSMutableDictionary alloc] init];
+    self->_deletedSupplementaryIndexPathsDict = [[NSMutableDictionary alloc] init];
+    self->_insertedSupplementaryIndexPathsDict = [[NSMutableDictionary alloc] init];
+    self->_deletedDecorationIndexPathsDict = [[NSMutableDictionary alloc] init];
+    self->_insertedDecorationIndexPathsDict = [[NSMutableDictionary alloc] init];
+    self->_deletedSectionsSet = [[NSMutableIndexSet alloc] init];
+    self->_insertedSectionsSet = [[NSMutableIndexSet alloc] init];
+}
 
 + (Class)invalidationContextClass {
     return [UICollectionViewLayoutInvalidationContext class];
@@ -31,12 +44,11 @@
     return [UICollectionViewLayoutAttributes class];
 }
 
-
-- (id /* block */)_animationForReusableView:(id)arg1 toLayoutAttributes:(id)arg2 {
+- (id /* block */)_animationForReusableView:(RDCollectionReusableView *)reusableView toLayoutAttributes:(RDCollectionViewLayoutAttributes *)attributes {
     return nil;
 }
 
-- (id /* block */)_animationForReusableView:(id)reusableView toLayoutAttributes:(id)attributes type:(NSUInteger)arg3 {
+- (id /* block */)_animationForReusableView:(RDCollectionReusableView *)reusableView toLayoutAttributes:(RDCollectionViewLayoutAttributes *)attributes type:(NSUInteger)type {
     return [self _animationForReusableView:reusableView toLayoutAttributes:attributes];
 }
 
@@ -48,17 +60,17 @@
     }
 }
 
-- (bool)_cellsShouldConferWithAutolayoutEngineForSizingInfo {
+- (BOOL)_cellsShouldConferWithAutolayoutEngineForSizingInfo {
     return YES;
 }
 
-- (id)_decorationViewForLayoutAttributes:(RDCollectionViewLayoutAttributes *)attributes {
+- (RDCollectionReusableView *)_decorationViewForLayoutAttributes:(RDCollectionViewLayoutAttributes *)attributes {
     RDCollectionReusableView *reusableView = nil;
     NSString *identifier = [attributes _elementKind];
     UINib *nib = [_decorationViewNibDict valueForKey:identifier];
     if (nib) {
         NSDictionary *options = nil;
-        id externalObjects = [_decorationViewExternalObjectsTables valueForKey:identifier];
+        NSDictionary *externalObjects = [_decorationViewExternalObjectsTables valueForKey:identifier];
         if (externalObjects) {
             options = [NSDictionary dictionaryWithObject:externalObjects forKey:@"UINibExternalObjects"];
         }
@@ -94,11 +106,11 @@
 }
 
 
-- (void)_didFinishLayoutTransitionAnimations:(bool)arg1 {
+- (void)_didFinishLayoutTransitionAnimations:(BOOL)bFlag {
     // no implementation
 }
 
-- (id)_dynamicAnimator {
+- (RDDynamicAnimator *)_dynamicAnimator {
     return _animator;
 }
 
@@ -106,7 +118,7 @@
     return CGRectZero;
 }
 
-- (bool)_estimatesSizes {
+- (BOOL)_estimatesSizes {
     return NO;
 }
 
@@ -129,45 +141,42 @@
 }
 
 
-- (id)_indexPathsToDeleteForDecorationViewOfKind:(id)arg1 {
-    return _deletedDecorationIndexPathsDict[arg1] ?: [NSArray array];
+- (NSArray<NSIndexPath *> *)_indexPathsToDeleteForDecorationViewOfKind:(NSString *)elementKind {
+    return _deletedDecorationIndexPathsDict[elementKind] ?: [NSArray array];
 }
 
-- (id)_indexPathsToDeleteForSupplementaryViewOfKind:(id)arg1 {
-    return _deletedSupplementaryIndexPathsDict[arg1] ?: [NSArray array];
+- (NSArray<NSIndexPath *> *)_indexPathsToDeleteForSupplementaryViewOfKind:(NSString *)elementKind {
+    return _deletedSupplementaryIndexPathsDict[elementKind] ?: [NSArray array];
 }
 
-- (id)_indexPathsToInsertForDecorationViewOfKind:(id)arg1 {
-    return _insertedDecorationIndexPathsDict[arg1] ?: [NSArray array];
+- (NSArray<NSIndexPath *> *)_indexPathsToInsertForDecorationViewOfKind:(NSString *)elementKind {
+    return _insertedDecorationIndexPathsDict[elementKind] ?: [NSArray array];
 }
 
-- (id)_indexPathsToInsertForSupplementaryViewOfKind:(id)arg1 {
-    return _insertedSupplementaryIndexPathsDict[arg1] ?: [NSArray array];
+- (NSArray<NSIndexPath *> *)_indexPathsToInsertForSupplementaryViewOfKind:(NSString *)elementKind {
+    return _insertedSupplementaryIndexPathsDict[elementKind] ?: [NSArray array];
 }
 
-- (void)_invalidateLayoutUsingContext:(id)invalidationContext {
+- (void)_invalidateLayoutUsingContext:(RDCollectionViewLayoutInvalidationContext *)invalidationContext {
     _invalidationContext = invalidationContext;
     [self invalidateLayout];
     _invalidationContext = nil;
 }
 
-- (id)_invalidationContextForEndingReorderingItemToFinalIndexPaths:(id)indexPaths previousIndexPaths:(id)previousIndexPaths reorderingCancelled:(bool)reorderingCancelled {
+- (RDCollectionViewLayoutInvalidationContext *)_invalidationContextForEndingReorderingItemToFinalIndexPaths:(NSArray<NSIndexPath *> *)indexPaths previousIndexPaths:(NSArray<NSIndexPath *> *)previousIndexPaths reorderingCancelled:(BOOL)reorderingCancelled {
     return [self invalidationContextForEndingInteractiveMovementOfItemsToFinalIndexPaths:indexPaths previousIndexPaths:previousIndexPaths movementCancelled:reorderingCancelled];
 }
 
-
-- (id)_invalidationContextForReorderingTargetPosition:(CGPoint)targetPosition targetIndexPaths:(id)indexPaths withPreviousPosition:(CGPoint)previousPosition previousIndexPaths:(id)previousIndexPaths {
+- (RDCollectionViewLayoutInvalidationContext *)_invalidationContextForReorderingTargetPosition:(CGPoint)targetPosition targetIndexPaths:(NSArray<NSIndexPath *> *)indexPaths withPreviousPosition:(CGPoint)previousPosition previousIndexPaths:(NSArray<NSIndexPath *> *)previousIndexPaths {
     return [self invalidationContextForInteractivelyMovingItems:indexPaths withTargetPosition:targetPosition previousIndexPaths:previousIndexPaths previousPosition:previousPosition];
 }
 
-
-
-- (bool)_isPrepared {
+- (BOOL)_isPrepared {
     return _layoutFlags.prepared;
 }
 
 
-- (id)_layoutAttributesForReorderedItemAtIndexPath:(NSIndexPath *)indexPath withTargetPosition:(CGPoint)targetPosition {
+- (RDCollectionViewLayoutAttributes *)_layoutAttributesForReorderedItemAtIndexPath:(NSIndexPath *)indexPath withTargetPosition:(CGPoint)targetPosition {
     return [self layoutAttributesForInteractivelyMovingItemAtIndexPath:indexPath withTargetPosition:targetPosition];
 }
 
@@ -202,6 +211,7 @@
     [self prepareForTransitionToLayout:transitioningToLayout];
 }
 
+// TODO
 - (void)_prepareToAnimateFromCollectionViewItems:(id)fromItems atContentOffset:(CGPoint)fromOffset toItems:(id)toItems atContentOffset:(CGPoint)toOffset {
     
     // for all versions except >=0x70000 to <0x70100
@@ -234,38 +244,19 @@
     
 }
 
-
-- (id)_reorderingTargetItemIndexPathForPosition:(CGPoint)position withPreviousIndexPath:(id)indexPath {
+- (NSIndexPath *)_reorderingTargetItemIndexPathForPosition:(CGPoint)position withPreviousIndexPath:(NSIndexPath *)indexPath {
     return [self targetIndexPathForInteractivelyMovingItem:indexPath withPosition:position];
 }
 
-- (void)_setElementKinds:(NSArray *)elementKinds {
-    if (_elementKinds != elementKinds) {
-        _elementKinds = [elementKinds copy];
-    }
-}
-
-- (void)_setExternalObjectTable:(id)externalObjectTable forNibLoadingOfDecorationViewOfKind:(id)viewKind {
+- (void)_setExternalObjectTable:(NSDictionary *)externalObjectTable forNibLoadingOfDecorationViewOfKind:(NSString *)elementKind {
     if (_decorationViewExternalObjectsTables == nil) {
         _decorationViewExternalObjectsTables = [[NSMutableDictionary alloc] init];
     }
-    [_decorationViewExternalObjectsTables setObject:externalObjectTable forKey:viewKind];
-}
-
-- (void)_setItems:(NSIndexSet *)items {
-    if (_items != items) {
-        _items = [items copy];
-    }
+    [_decorationViewExternalObjectsTables setObject:externalObjectTable forKey:elementKind];
 }
 
 - (void)_setPrepared:(BOOL)bFlag {
     _layoutFlags.prepared = bFlag;
-}
-
-- (void)_setSections:(NSIndexSet *)sections {
-    if (_sections != sections) {
-        _sections = [sections copy];
-    }
 }
 
 - (void)_setWantsRightToLeftHorizontalMirroringIfNeeded:(BOOL)bFlag {
@@ -279,26 +270,19 @@
 }
 
 - (BOOL)_supportsAdvancedTransitionAnimations {
-//    if (&__UIApplicationLinkedOnVersion) {
-//        return __UIApplicationLinkedOnVersion > 0x6ffff;
-//    } else {
-//        return __UIApplicationLinkedOnOrAfter(0x70000);
-//    }
-    return YES;
+    return (_RDApplicationLinkedOnVersion != NULL && _RDApplicationLinkedOnVersion > 0x6ffff) || _RDApplicationLinkedOnOrAfter(0x70000);
 }
 
 - (BOOL)_wantsRightToLeftHorizontalMirroringIfNeeded {
     return NO;
 }
 
-
 - (BOOL)canBeEdited {
     return NO;
 }
 
-- (id)collectionView {
-    return nil;
-//    return _collectionView ?: [_compositionLayout collectionView];
+- (RDCollectionView *)collectionView {
+    return _collectionView ?: [_compositionLayout collectionView];
 }
 
 - (CGSize)collectionViewContentSize {
@@ -402,9 +386,7 @@
         } else {
             attribute = [[_collectionView cellForItemAtIndexPath:itemIndexPath] _layoutAttributes];
         }
-
     }
-    
     
     RDCollectionViewUpdate *update = [_collectionView _currentUpdate];
     if (update == nil || [_deletedSectionsSet containsIndex:itemIndexPath.section]) {
@@ -513,15 +495,13 @@
     return [self _indexPathsToInsertForSupplementaryViewOfKind:elementKind];
 }
 
-
-- (id)init {
+- (instancetype)init {
     self = [super init];
     if (self) {
-        //_RDCollectionViewLayoutCommonInit();
+        _RDCollectionViewLayoutCommonInit(self);
     }
     return self;
 }
-
 
 // TODO: Verify & Refactor for same output
 - (nullable RDCollectionViewLayoutAttributes *)initialLayoutAttributesForAppearingDecorationElementOfKind:(NSString *)elementKind atIndexPath:(NSIndexPath *)decorationIndexPath {
@@ -708,8 +688,6 @@
     }
 }
 
-
-
 - (nullable instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super init];
     if (self) {
@@ -717,11 +695,10 @@
         _decorationViewExternalObjectsTables = [aDecoder decodeObjectForKey:@"UICollectionViewDecorationViewPrototypeNibExternalObjects"];
         // TODO
 //        _decorationViewExternalObjectsTables = _mutableDictionaryByTransformingLeafDictionariesToWeakValued();
-//        _RDCollectionViewLayoutCommonInit();
+        _RDCollectionViewLayoutCommonInit(self);
     }
     return self;
 }
-
 
 - (void)invalidateLayout {
     if (_invalidationContext) {
@@ -1031,7 +1008,6 @@
     return proposedContentOffset;
 }
 
-
 - (NSIndexPath *)targetIndexPathForInteractivelyMovingItem:(NSIndexPath *)previousIndexPath withPosition:(CGPoint)position {
     
     CGRect positionRect;
@@ -1062,9 +1038,6 @@
 - (CGPoint)updatesContentOffsetForProposedContentOffset:(CGPoint)proposedContentOffset {
     return proposedContentOffset;
 }
-
-
-
 
 
 @end
