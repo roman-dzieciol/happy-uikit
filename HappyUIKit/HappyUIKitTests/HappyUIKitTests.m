@@ -8,6 +8,13 @@
 
 #import <XCTest/XCTest.h>
 
+@interface UICollectionViewLayout()
+
+- (CGRect)convertRect:(CGRect)rect toLayout:(UICollectionViewLayout *)layout;
+- (UIEdgeInsets)_preferredLayoutMargins;
+
+@end
+
 @interface HappyUIKitTests : XCTestCase
 
 @end
@@ -25,8 +32,11 @@
 }
 
 - (void)testExample {
+    UICollectionViewLayout* layout = [[UICollectionViewLayout alloc] init];
+    UIEdgeInsets insets = [layout _preferredLayoutMargins];
     // This is an example of a functional test case.
     // Use XCTAssert and related functions to verify your tests produce the correct results.
+    NSLog(@"");
 }
 
 @end

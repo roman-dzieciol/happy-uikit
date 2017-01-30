@@ -22,6 +22,10 @@ extern const int _RDFlowLayoutAlignment_3;
 
 extern const NSUInteger _RD_AutomaticDimension;
 
+extern NSUInteger _RDApplicationLinkedOnVersion __attribute__((weak_import));
+
+extern BOOL _RDApplicationLinkedOnOrAfter(NSUInteger version);
+
 typedef NS_ENUM(NSInteger, RDCollectionUpdateAction) {
     RDCollectionUpdateActionInsert,
     RDCollectionUpdateActionDelete,

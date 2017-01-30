@@ -25,7 +25,7 @@ NS_ASSUME_NONNULL_BEGIN
     __weak _RDCollectionViewCompositionLayout  * _compositionLayout;
     NSMutableDictionary * _decorationViewClassDict;
     NSMutableDictionary * _decorationViewExternalObjectsTables;
-    NSMutableDictionary * _decorationViewNibDict;
+    NSMutableDictionary<NSString *, UINib *>* _decorationViewNibDict;
     NSMutableDictionary * _deletedDecorationIndexPathsDict;
     NSMutableIndexSet * _deletedSectionsSet;
     NSMutableDictionary * _deletedSupplementaryIndexPathsDict;

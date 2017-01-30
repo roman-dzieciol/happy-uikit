@@ -16,90 +16,310 @@
 #import "_RDCollectionViewItemKey.h"
 #import "RDCollectionViewUpdateItem.h"
 #import "RDCollectionViewLayoutInvalidationContext.h"
-
-
+#import "RDCollectionViewTransitionLayout.h"
+#import "_RDCollectionViewCompositionLayout.h"
 
 
 @implementation RDCollectionViewLayout
 
-#if 0
 
-+ (Class)invalidationContextClass;
-+ (Class)layoutAttributesClass;
++ (Class)invalidationContextClass {
+    return [UICollectionViewLayoutInvalidationContext class];
+}
 
-- (void).cxx_destruct;
-- (id /* block */)_animationForReusableView:(id)arg1 toLayoutAttributes:(id)arg2;
-- (id /* block */)_animationForReusableView:(id)arg1 toLayoutAttributes:(id)arg2 type:(NSUInteger)arg3;
-- (CGRect)_bounds;
-- (bool)_cellsShouldConferWithAutolayoutEngineForSizingInfo;
-- (struct _RDCollectionViewCompositionLayout { Class x1; }*)_compositionLayout;
-- (id)_decorationViewForLayoutAttributes:(id)arg1;
-- (void)_didFinishLayoutTransitionAnimations:(bool)arg1;
-- (id)_dynamicAnimator;
-- (CGRect)_dynamicReferenceBounds;
-- (id)_elementKinds;
-- (bool)_estimatesSizes;
-- (void)_finalizeCollectionViewItemAnimations;
-- (void)_finalizeLayoutTransition;
-- (CGRect)_frame;
-- (id)_indexPathsToDeleteForDecorationViewOfKind:(id)arg1;
-- (id)_indexPathsToDeleteForSupplementaryViewOfKind:(id)arg1;
-- (id)_indexPathsToInsertForDecorationViewOfKind:(id)arg1;
-- (id)_indexPathsToInsertForSupplementaryViewOfKind:(id)arg1;
-- (void)_invalidateLayoutUsingContext:(id)arg1;
-- (id)_invalidationContextForEndingReorderingItemToFinalIndexPaths:(id)arg1 previousIndexPaths:(id)arg2 reorderingCancelled:(bool)arg3;
-- (id)_invalidationContextForReorderingTargetPosition:(CGPoint)arg1 targetIndexPaths:(id)arg2 withPreviousPosition:(CGPoint)arg3 previousIndexPaths:(id)arg4;
-- (bool)_isPrepared;
-- (id)_items;
-- (id)_layoutAttributesForReorderedItemAtIndexPath:(id)arg1 withTargetPosition:(CGPoint)arg2;
-- (CGPoint)_layoutOffset;
-- (NSUInteger)_layoutOffsetEdges;
-- (CGPoint)_offsetInTopParentLayout:(_RDCollectionViewCompositionLayout *)arg1;
-- (UIEdgeInsets)_preferredLayoutMargins;
-- (void)_prepareForTransitionFromLayout:(id)arg1;
-- (void)_prepareForTransitionToLayout:(id)arg1;
-- (void)_prepareToAnimateFromCollectionViewItems:(id)arg1 atContentOffset:(CGPoint)arg2 toItems:(id)arg3 atContentOffset:(CGPoint)arg4;
-- (id)_reorderingTargetItemIndexPathForPosition:(CGPoint)arg1 withPreviousIndexPath:(id)arg2;
-- (id)_sections;
-- (void)_setCollectionView:(id)arg1;
-- (void)_setCollectionViewBoundsSize:(CGSize)arg1;
-- (void)_setCompositionLayout:(struct _RDCollectionViewCompositionLayout { Class x1; }*)arg1;
-- (void)_setDynamicAnimator:(id)arg1;
-- (void)_setElementKinds:(id)arg1;
-- (void)_setExternalObjectTable:(id)arg1 forNibLoadingOfDecorationViewOfKind:(id)arg2;
-- (void)_setFrame:(CGRect)arg1;
-- (void)_setItems:(id)arg1;
-- (void)_setLayoutOffset:(CGPoint)arg1;
-- (void)_setLayoutOffsetEdges:(NSUInteger)arg1;
-- (void)_setPrepared:(bool)arg1;
-- (void)_setSections:(id)arg1;
-- (void)_setSiblingLayout:(id)arg1;
-- (void)_setSublayoutType:(NSInteger)arg1;
-- (void)_setWantsRightToLeftHorizontalMirroringIfNeeded:(bool)arg1;
-- (BOOL)_shouldScrollToContentBeginningInRightToLeft;
-- (id)_siblingLayout;
-- (NSInteger)_sublayoutType;
-- (BOOL)_supportsAdvancedTransitionAnimations;
-- (BOOL)_wantsRightToLeftHorizontalMirroringIfNeeded;
++ (Class)layoutAttributesClass {
+    return [UICollectionViewLayoutAttributes class];
+}
+
+
+- (id /* block */)_animationForReusableView:(id)arg1 toLayoutAttributes:(id)arg2 {
+    return nil;
+}
+
+- (id /* block */)_animationForReusableView:(id)reusableView toLayoutAttributes:(id)attributes type:(NSUInteger)arg3 {
+    return [self _animationForReusableView:reusableView toLayoutAttributes:attributes];
+}
+
+- (CGRect)_bounds {
+    if (_compositionLayout) {
+        return CGRectMake(0, 0, _compositionLayout._frame.size.width, _compositionLayout._frame.size.height);
+    } else {
+        return [_collectionView bounds];
+    }
+}
+
+- (bool)_cellsShouldConferWithAutolayoutEngineForSizingInfo {
+    return YES;
+}
+
+- (id)_decorationViewForLayoutAttributes:(RDCollectionViewLayoutAttributes *)attributes {
+    RDCollectionReusableView *reusableView = nil;
+    NSString *identifier = [attributes _elementKind];
+    UINib *nib = [_decorationViewNibDict valueForKey:identifier];
+    if (nib) {
+        NSDictionary *options = nil;
+        id externalObjects = [_decorationViewExternalObjectsTables valueForKey:identifier];
+        if (externalObjects) {
+            options = [NSDictionary dictionaryWithObject:externalObjects forKey:@"UINibExternalObjects"];
+        }
+        NSArray *nibObjects = [nib instantiateWithOwner:nil options:options];
+        id nibObject = nibObjects[0];
+        NSAssert1(nibObjects.count == 1 &&
+                  nibObjects[0] != nil &&
+                  [nibObjects[0] isKindOfClass:[RDCollectionReusableView class]],
+                  @"invalid nib registered for identifier (%@) - nib must contain exactly one top level object which must be a UICollectionReusableView instance", identifier);
+        
+        reusableView = (RDCollectionReusableView *)nibObjects[0];
+        NSAssert2([[reusableView reuseIdentifier] length] != 0 &&
+                  [[reusableView reuseIdentifier] isEqualToString:identifier], @"view reuse identifier in nib (%@) does not match the element kind used to register the nib (%@)", [reusableView reuseIdentifier], identifier);
+        
+    } else {
+        Class viewClass = [_decorationViewClassDict valueForKey:identifier];
+        reusableView = [[viewClass alloc] initWithFrame:[attributes frame]];
+    }
+    
+    NSAssert1(reusableView != nil, @"could not dequeue a decoration view of kind: %@ - must register as a class or nib or connect a prototype in a storyboard", identifier);
+    
+    [reusableView _setReuseIdentifier:identifier];
+    
+    [UIView performWithoutAnimation:^{ // TODO: [UIView _performWithoutAnimation:^{
+        [reusableView _setLayoutAttributes:attributes];
+    }];
+    [reusableView setAutoresizingMask:UIViewAutoresizingNone];
+    [reusableView setTranslatesAutoresizingMaskIntoConstraints:YES];
+    //[reusableView _setHostsLayoutEngine:YES];
+    [reusableView _markAsDequeued];
+    
+    return reusableView;
+}
+
+
+- (void)_didFinishLayoutTransitionAnimations:(bool)arg1 {
+    // no implementation
+}
+
+- (id)_dynamicAnimator {
+    return _animator;
+}
+
+- (CGRect)_dynamicReferenceBounds {
+    return CGRectZero;
+}
+
+- (bool)_estimatesSizes {
+    return NO;
+}
+
+
+- (void)_finalizeCollectionViewItemAnimations {
+    [_initialAnimationLayoutAttributesDict removeAllObjects];
+    [_finalAnimationLayoutAttributesDict removeAllObjects];
+}
+
+
+- (void)_finalizeLayoutTransition {
+    _transitioningFromLayout = nil;
+    _layoutFlags.inTransitionFromTransitionLayout = NO;
+    _transitioningToLayout = nil;
+    _layoutFlags.inTransitionToTransitionLayout = NO;
+    [self finalizeLayoutTransition];
+    if ([[self collectionView] collectionViewLayout] == self) {
+//        [_animator _tickle];
+    }
+}
+
+
+- (id)_indexPathsToDeleteForDecorationViewOfKind:(id)arg1 {
+    return _deletedDecorationIndexPathsDict[arg1] ?: [NSArray array];
+}
+
+- (id)_indexPathsToDeleteForSupplementaryViewOfKind:(id)arg1 {
+    return _deletedSupplementaryIndexPathsDict[arg1] ?: [NSArray array];
+}
+
+- (id)_indexPathsToInsertForDecorationViewOfKind:(id)arg1 {
+    return _insertedDecorationIndexPathsDict[arg1] ?: [NSArray array];
+}
+
+- (id)_indexPathsToInsertForSupplementaryViewOfKind:(id)arg1 {
+    return _insertedSupplementaryIndexPathsDict[arg1] ?: [NSArray array];
+}
+
+- (void)_invalidateLayoutUsingContext:(id)invalidationContext {
+    _invalidationContext = invalidationContext;
+    [self invalidateLayout];
+    _invalidationContext = nil;
+}
+
+- (id)_invalidationContextForEndingReorderingItemToFinalIndexPaths:(id)indexPaths previousIndexPaths:(id)previousIndexPaths reorderingCancelled:(bool)reorderingCancelled {
+    return [self invalidationContextForEndingInteractiveMovementOfItemsToFinalIndexPaths:indexPaths previousIndexPaths:previousIndexPaths movementCancelled:reorderingCancelled];
+}
+
+
+- (id)_invalidationContextForReorderingTargetPosition:(CGPoint)targetPosition targetIndexPaths:(id)indexPaths withPreviousPosition:(CGPoint)previousPosition previousIndexPaths:(id)previousIndexPaths {
+    return [self invalidationContextForInteractivelyMovingItems:indexPaths withTargetPosition:targetPosition previousIndexPaths:previousIndexPaths previousPosition:previousPosition];
+}
+
+
+
+- (bool)_isPrepared {
+    return _layoutFlags.prepared;
+}
+
+
+- (id)_layoutAttributesForReorderedItemAtIndexPath:(NSIndexPath *)indexPath withTargetPosition:(CGPoint)targetPosition {
+    return [self layoutAttributesForInteractivelyMovingItemAtIndexPath:indexPath withTargetPosition:targetPosition];
+}
+
+- (CGPoint)_offsetInTopParentLayout:(_RDCollectionViewCompositionLayout *)compositionLayout {
+    CGPoint offset = _frame.origin;
+    _RDCollectionViewCompositionLayout *layout = [layout _compositionLayout];
+    while (layout) { // TODO: Verify
+        offset.x += [layout _frame].origin.x;
+        offset.y += [layout _frame].origin.y;
+        layout = [layout _compositionLayout];
+    }
+    return offset;
+}
+
+- (UIEdgeInsets)_preferredLayoutMargins {
+    return UIEdgeInsetsMake(_RD_AutomaticDimension,
+                            _RD_AutomaticDimension,
+                            _RD_AutomaticDimension,
+                            _RD_AutomaticDimension); // Verify
+}
+
+- (void)_prepareForTransitionFromLayout:(RDCollectionViewLayout *)transitioningFromLayout {
+    _transitioningFromLayout = transitioningFromLayout;
+    _layoutFlags.inTransitionFromTransitionLayout = [_transitioningFromLayout isKindOfClass:[RDCollectionViewTransitionLayout class]];
+    [self prepareForTransitionToLayout:transitioningFromLayout];
+}
+
+- (void)_prepareForTransitionToLayout:(RDCollectionViewLayout *)transitioningToLayout {
+    _transitioningToLayout = transitioningToLayout;
+    _layoutFlags.inTransitionToTransitionLayout = [_transitioningToLayout isKindOfClass:[RDCollectionViewTransitionLayout class]];
+//    [_animator _setRunning:NO];
+    [self prepareForTransitionToLayout:transitioningToLayout];
+}
+
+- (void)_prepareToAnimateFromCollectionViewItems:(id)fromItems atContentOffset:(CGPoint)fromOffset toItems:(id)toItems atContentOffset:(CGPoint)toOffset {
+    
+    // for all versions except >=0x70000 to <0x70100
+    
+    if ((_RDApplicationLinkedOnVersion != NULL && (_RDApplicationLinkedOnVersion < 0x6ffff || _RDApplicationLinkedOnVersion >= 0x70100)) || // Optimized check
+        !_RDApplicationLinkedOnOrAfter(0x70000) || (_RDApplicationLinkedOnVersion != NULL && _RDApplicationLinkedOnVersion >= 0x70100)  // Unoptimized check
+        ) {
+        
+        NSMutableDictionary *fromItemsByKey = [[NSMutableDictionary alloc] initWithCapacity:[fromItems count]];
+        
+        for (id item in fromItems) {
+            _RDCollectionViewItemKey *key = [_RDCollectionViewItemKey collectionItemKeyForLayoutAttributes:item];
+            [fromItemsByKey setObject:item forKey:key];
+        }
+        
+        NSMutableDictionary *toItemsByKey = [[NSMutableDictionary alloc] initWithCapacity:[toItems count]];
+        
+        for (id item in toItems) {
+            _RDCollectionViewItemKey *key = [_RDCollectionViewItemKey collectionItemKeyForLayoutAttributes:item];
+            [toItemsByKey setObject:item forKey:key];
+        }
+        
+        NSMutableSet *itemKeySet = [NSMutableSet setWithArray:[toItemsByKey allKeys]];
+        [itemKeySet addObjectsFromArray:[fromItemsByKey allKeys]];
+        
+        [itemKeySet enumerateObjectsUsingBlock:^(id  _Nonnull item, BOOL * _Nonnull stop) {
+            // TODO
+        }];
+    }
+    
+}
+
+
+- (id)_reorderingTargetItemIndexPathForPosition:(CGPoint)position withPreviousIndexPath:(id)indexPath {
+    return [self targetIndexPathForInteractivelyMovingItem:indexPath withPosition:position];
+}
+
+- (void)_setElementKinds:(NSArray *)elementKinds {
+    if (_elementKinds != elementKinds) {
+        _elementKinds = [elementKinds copy];
+    }
+}
+
+- (void)_setExternalObjectTable:(id)externalObjectTable forNibLoadingOfDecorationViewOfKind:(id)viewKind {
+    if (_decorationViewExternalObjectsTables == nil) {
+        _decorationViewExternalObjectsTables = [[NSMutableDictionary alloc] init];
+    }
+    [_decorationViewExternalObjectsTables setObject:externalObjectTable forKey:viewKind];
+}
+
+- (void)_setItems:(NSIndexSet *)items {
+    if (_items != items) {
+        _items = [items copy];
+    }
+}
+
+- (void)_setPrepared:(BOOL)bFlag {
+    _layoutFlags.prepared = bFlag;
+}
+
+- (void)_setSections:(NSIndexSet *)sections {
+    if (_sections != sections) {
+        _sections = [sections copy];
+    }
+}
+
+- (void)_setWantsRightToLeftHorizontalMirroringIfNeeded:(BOOL)bFlag {
+    if(_layoutFlags.wantsRightToLeftHorizontalMirroringIfNeeded != bFlag) {
+        _layoutFlags.wantsRightToLeftHorizontalMirroringIfNeeded = NO;
+    }
+}
+
+- (BOOL)_shouldScrollToContentBeginningInRightToLeft {
+    return NO;
+}
+
+- (BOOL)_supportsAdvancedTransitionAnimations {
+//    if (&__UIApplicationLinkedOnVersion) {
+//        return __UIApplicationLinkedOnVersion > 0x6ffff;
+//    } else {
+//        return __UIApplicationLinkedOnOrAfter(0x70000);
+//    }
+    return YES;
+}
+
+- (BOOL)_wantsRightToLeftHorizontalMirroringIfNeeded {
+    return NO;
+}
+
 
 - (BOOL)canBeEdited {
     return NO;
 }
 
 - (id)collectionView {
-    return _collectionView ?: [_compositionLayout collectionView];
+    return nil;
+//    return _collectionView ?: [_compositionLayout collectionView];
 }
 
 - (CGSize)collectionViewContentSize {
     return CGSizeZero;
 }
 
-- (CGRect)convertRect:(CGRect)arg1 fromLayout:(RDCollectionViewLayout *)arg2;
+// TODO: Verify & Refactor for same output
+- (CGRect)convertRect:(CGRect)rect fromLayout:(RDCollectionViewLayout *)layout {
+    CGPoint thisOffset = [self _offsetInTopParentLayout:_compositionLayout];
+    CGPoint otherOffset = [layout _offsetInTopParentLayout:layout->_compositionLayout];
+    NSAssert(_compositionLayout != nil && _compositionLayout == layout->_compositionLayout, @"to convert between layouts, both layouts must have non-nil parent composition layouts and have the same parent at the top of their layout tree");
+    return CGRectOffset(rect, otherOffset.x - thisOffset.x, otherOffset.y - thisOffset.y);
+}
 
-
-- (CGRect)convertRect:(CGRect)arg1 toLayout:(RDCollectionViewLayout *)arg2;
-
-#endif
+// TODO: Verify & Refactor for same output
+- (CGRect)convertRect:(CGRect)rect toLayout:(RDCollectionViewLayout *)layout {
+    CGPoint thisOffset = [self _offsetInTopParentLayout:_compositionLayout];
+    CGPoint otherOffset = [layout _offsetInTopParentLayout:layout->_compositionLayout];
+    NSAssert(_compositionLayout != nil && _compositionLayout == layout->_compositionLayout, @"to convert between layouts, both layouts must have non-nil parent composition layouts and have the same parent at the top of their layout tree");
+    return CGRectOffset(rect, thisOffset.x - otherOffset.x, thisOffset.y - otherOffset.y);
+}
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     if ([_decorationViewNibDict count] != 0) {
