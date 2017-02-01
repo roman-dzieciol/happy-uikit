@@ -20,9 +20,6 @@
 #import "_RDCollectionViewCompositionLayout.h"
 
 
-
-
-
 @implementation RDCollectionViewLayout
 
 void _RDCollectionViewLayoutCommonInit(RDCollectionViewLayout *self) {

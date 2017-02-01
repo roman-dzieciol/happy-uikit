@@ -27,6 +27,8 @@
 		E33FA8F11E3C03BA0017E923 /* RDCollectionViewLayoutAttributes.m in Sources */ = {isa = PBXBuildFile; fileRef = E33FA8EF1E3C03BA0017E923 /* RDCollectionViewLayoutAttributes.m */; };
 		E33FA8F41E3C652D0017E923 /* RDCollectionView.h in Headers */ = {isa = PBXBuildFile; fileRef = E33FA8F21E3C652D0017E923 /* RDCollectionView.h */; };
 		E33FA8F51E3C652D0017E923 /* RDCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = E33FA8F31E3C652D0017E923 /* RDCollectionView.m */; };
+		E38E9CB31E417B1B00BCFA60 /* RDCollectionViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = E38E9CB11E417B1B00BCFA60 /* RDCollectionViewCell.h */; };
+		E38E9CB41E417B1B00BCFA60 /* RDCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E38E9CB21E417B1B00BCFA60 /* RDCollectionViewCell.m */; };
 		E3ACDD991E389ABA00497F78 /* HappyUIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3ACDD8F1E389ABA00497F78 /* HappyUIKit.framework */; };
 		E3ACDD9E1E389ABA00497F78 /* HappyUIKitTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E3ACDD9D1E389ABA00497F78 /* HappyUIKitTests.m */; };
 		E3ACDDA01E389ABA00497F78 /* HappyUIKit.h in Headers */ = {isa = PBXBuildFile; fileRef = E3ACDD921E389ABA00497F78 /* HappyUIKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -83,6 +85,8 @@
 		E33FA8EF1E3C03BA0017E923 /* RDCollectionViewLayoutAttributes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDCollectionViewLayoutAttributes.m; sourceTree = "<group>"; };
 		E33FA8F21E3C652D0017E923 /* RDCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDCollectionView.h; sourceTree = "<group>"; };
 		E33FA8F31E3C652D0017E923 /* RDCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDCollectionView.m; sourceTree = "<group>"; };
+		E38E9CB11E417B1B00BCFA60 /* RDCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDCollectionViewCell.h; sourceTree = "<group>"; };
+		E38E9CB21E417B1B00BCFA60 /* RDCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDCollectionViewCell.m; sourceTree = "<group>"; };
 		E3ACDD8F1E389ABA00497F78 /* HappyUIKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = HappyUIKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E3ACDD921E389ABA00497F78 /* HappyUIKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HappyUIKit.h; sourceTree = "<group>"; };
 		E3ACDD931E389ABA00497F78 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -205,34 +209,36 @@
 		E3ACDDD71E389BCD00497F78 /* CollectionView */ = {
 			isa = PBXGroup;
 			children = (
-				E3ACDDD91E389C9100497F78 /* UI* */,
+				E330FEEF1E3EE220001894D8 /* _RDCollectionViewCompositionLayout.h */,
+				E330FEF01E3EE220001894D8 /* _RDCollectionViewCompositionLayout.m */,
+				E330FEE11E3D6263001894D8 /* _RDCollectionViewItemKey.h */,
+				E330FEE21E3D6263001894D8 /* _RDCollectionViewItemKey.m */,
 				E3ACDDD81E389BDE00497F78 /* FlowLayoutData */,
+				E330FED51E3D5288001894D8 /* RDCollectionReusableView.h */,
+				E330FED61E3D5288001894D8 /* RDCollectionReusableView.m */,
+				E33FA8F21E3C652D0017E923 /* RDCollectionView.h */,
+				E33FA8F31E3C652D0017E923 /* RDCollectionView.m */,
+				E38E9CB11E417B1B00BCFA60 /* RDCollectionViewCell.h */,
+				E38E9CB21E417B1B00BCFA60 /* RDCollectionViewCell.m */,
+				E330FEDD1E3D5BF4001894D8 /* RDCollectionViewData.h */,
+				E330FEDE1E3D5BF4001894D8 /* RDCollectionViewData.m */,
 				E3ACDDB11E389B2600497F78 /* RDCollectionViewFlowLayout.h */,
 				E3ACDDBD1E389B2600497F78 /* RDCollectionViewFlowLayout.m */,
 				E3ACDDB21E389B2600497F78 /* RDCollectionViewFlowLayoutInvalidationContext.h */,
 				E3ACDDB41E389B2600497F78 /* RDCollectionViewFlowLayoutInvalidationContext.m */,
-				E330FEEF1E3EE220001894D8 /* _RDCollectionViewCompositionLayout.h */,
-				E330FEF01E3EE220001894D8 /* _RDCollectionViewCompositionLayout.m */,
 				E3ACDDB01E389B2600497F78 /* RDCollectionViewLayout.h */,
 				E3ACDDB61E389B2600497F78 /* RDCollectionViewLayout.m */,
-				E330FEE11E3D6263001894D8 /* _RDCollectionViewItemKey.h */,
-				E330FEE21E3D6263001894D8 /* _RDCollectionViewItemKey.m */,
-				E330FEDD1E3D5BF4001894D8 /* RDCollectionViewData.h */,
-				E330FEDE1E3D5BF4001894D8 /* RDCollectionViewData.m */,
-				E330FEE51E3D7E8B001894D8 /* RDCollectionViewUpdateItem.h */,
-				E330FEE61E3D7E8B001894D8 /* RDCollectionViewUpdateItem.m */,
-				E330FED91E3D5B3C001894D8 /* RDCollectionViewUpdate.h */,
-				E330FEDA1E3D5B3C001894D8 /* RDCollectionViewUpdate.m */,
 				E33FA8EE1E3C03BA0017E923 /* RDCollectionViewLayoutAttributes.h */,
-				E330FEEB1E3ED28A001894D8 /* RDCollectionViewTransitionLayout.h */,
-				E330FEEC1E3ED28A001894D8 /* RDCollectionViewTransitionLayout.m */,
 				E33FA8EF1E3C03BA0017E923 /* RDCollectionViewLayoutAttributes.m */,
 				E3ACDDB31E389B2600497F78 /* RDCollectionViewLayoutInvalidationContext.h */,
 				E3ACDDB51E389B2600497F78 /* RDCollectionViewLayoutInvalidationContext.m */,
-				E33FA8F21E3C652D0017E923 /* RDCollectionView.h */,
-				E33FA8F31E3C652D0017E923 /* RDCollectionView.m */,
-				E330FED51E3D5288001894D8 /* RDCollectionReusableView.h */,
-				E330FED61E3D5288001894D8 /* RDCollectionReusableView.m */,
+				E330FEEB1E3ED28A001894D8 /* RDCollectionViewTransitionLayout.h */,
+				E330FEEC1E3ED28A001894D8 /* RDCollectionViewTransitionLayout.m */,
+				E330FED91E3D5B3C001894D8 /* RDCollectionViewUpdate.h */,
+				E330FEDA1E3D5B3C001894D8 /* RDCollectionViewUpdate.m */,
+				E330FEE51E3D7E8B001894D8 /* RDCollectionViewUpdateItem.h */,
+				E330FEE61E3D7E8B001894D8 /* RDCollectionViewUpdateItem.m */,
+				E3ACDDD91E389C9100497F78 /* UI* */,
 			);
 			name = CollectionView;
 			sourceTree = "<group>";
@@ -281,6 +287,7 @@
 				E330FEF11E3EE220001894D8 /* _RDCollectionViewCompositionLayout.h in Headers */,
 				E3ACDDA01E389ABA00497F78 /* HappyUIKit.h in Headers */,
 				E33FA8F01E3C03BA0017E923 /* RDCollectionViewLayoutAttributes.h in Headers */,
+				E38E9CB31E417B1B00BCFA60 /* RDCollectionViewCell.h in Headers */,
 				E3ACDDC81E389B2600497F78 /* RDCollectionViewLayoutInvalidationContext.h in Headers */,
 				E3ACDDC01E389B2600497F78 /* ScratchPad.h in Headers */,
 				E330FEE71E3D7E8B001894D8 /* RDCollectionViewUpdateItem.h in Headers */,
@@ -420,6 +427,7 @@
 				E330FED81E3D5288001894D8 /* RDCollectionReusableView.m in Sources */,
 				E330FEE01E3D5BF4001894D8 /* RDCollectionViewData.m in Sources */,
 				E330FEF21E3EE220001894D8 /* _RDCollectionViewCompositionLayout.m in Sources */,
+				E38E9CB41E417B1B00BCFA60 /* RDCollectionViewCell.m in Sources */,
 				E3ACDDC41E389B2600497F78 /* _RDFlowLayoutInfo.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

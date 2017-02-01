@@ -31,7 +31,8 @@
 @protocol _UIKeyboardAutoRespondingScrollView
 @end
 
-@interface RDCollectionView : UIScrollView <_UIKeyboardAutoRespondingScrollView> {
+@interface RDCollectionView : UIScrollView {
+//@interface RDCollectionView : UIScrollView <_UIKeyboardAutoRespondingScrollView> {
     NSTimer * _autoscrollTimer;
     UIView * _backgroundView;
     NSMutableDictionary * _cellClassDict;
@@ -553,47 +554,8 @@
 - (void)touchesMoved:(id)arg1 withEvent:(id)arg2;
 - (void)traitCollectionDidChange:(id)arg1;
 - (void)updateInteractiveMovementTargetPosition:(CGPoint)arg1;
-- (id)visibleCells;
-- (id)visibleSupplementaryViewsOfKind:(id)arg1;
+- (NSArray<__kindof RDCollectionViewCell *> *)visibleCells;
+- (NSArray<RDCollectionReusableView *> *)visibleSupplementaryViewsOfKind:(NSString *)elementKind;
 
-// Image: /System/Library/Frameworks/PhotosUI.framework/PhotosUI
-
-- (id)next:(NSInteger)arg1 indexPathFromIndexPath:(id)arg2;
-- (void)pu_scrollToItemAtIndexPath:(id)arg1 atScrollPosition:(NSUInteger)arg2 animated:(bool)arg3;
-- (void)pu_scrollToRect:(CGRect)arg1 atScrollPosition:(NSUInteger)arg2 animated:(bool)arg3;
-
-// Image: /System/Library/PrivateFrameworks/ChatKit.framework/ChatKit
-
-- (CGSize)__ck_contentSize;
-- (id)__ck_indexPathForLastItem;
-- (id)__ck_indexPathForReplyItem;
-- (bool)__ck_isScrolledToBottomHidingIndexPath:(id)arg1;
-- (void)__ck_reloadDataKeepingSelection;
-- (CGPoint)__ck_scrollToBottomContentOffsetHidingIndexPath:(id)arg1;
-- (void)__ck_scrollToTopOfCellAtIndexPath:(id)arg1 hidingCellAtIndexPath:(id)arg2 animated:(bool)arg3;
-- (id)ckIndexPathsForElementsInRect:(CGRect)arg1;
-
-// Image: /System/Library/PrivateFrameworks/FuseUI.framework/FuseUI
-
-- (void)music_inheritedLayoutInsetsDidChange;
-
-// Image: /System/Library/PrivateFrameworks/GameCenterPrivateUI.framework/GameCenterPrivateUI
-
-- (id)_gkDequeueCellForClass:(Class)arg1 forIndexPath:(id)arg2;
-- (id)_gkDequeueSupplementaryViewForClass:(Class)arg1 ofKind:(id)arg2 forIndexPath:(id)arg3;
-- (void)_gkPerformWithoutViewReuse:(id /* block */)arg1;
-- (void)_gkRegisterCellClass:(Class)arg1;
-- (void)_gkRegisterClass:(Class)arg1 forSupplementaryViewOfKind:(id)arg2;
-- (void)_gkRegisterNib:(id)arg1 forCellClass:(Class)arg2;
-- (id)_gkReuseIdentifierForClass:(Class)arg1;
-- (id)_gkVisibleCellForIndexPath:(id)arg1;
-
-// Image: /System/Library/PrivateFrameworks/TVMLKit.framework/TVMLKit
-
-- (id)tv_indexPathsForIndexSet:(id)arg1 withOptions:(NSUInteger)arg2 prefix:(id)arg3;
-- (void)tv_updateItemsInSection:(NSUInteger)arg1 withChange:(id)arg2;
-- (void)tv_updateItemsInSection:(NSUInteger)arg1 withChanges:(id)arg2;
-- (void)tv_updateSectionsWithChange:(id)arg1;
-- (void)tv_updateSectionsWithChanges:(id)arg1;
 
 @end
